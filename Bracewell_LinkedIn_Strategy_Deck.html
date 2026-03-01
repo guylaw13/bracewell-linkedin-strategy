@@ -1,0 +1,2584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LinkedIn Content Strategy | Bracewell Environmental Practice | InnovAItion Partners</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ===== CSS VARIABLES ===== */
+:root {
+  --ip-primary-dark: #1C1340;
+  --ip-primary-blue: #4169E1;
+  --ip-linkedin-blue: #0A66C2;
+  --ip-text-dark: #0F172A;
+  --ip-text-slate: #1E293B;
+  --ip-text-muted: #475569;
+  --ip-text-light: #64748B;
+  --ip-accent-purple: #C7BFE8;
+  --ip-accent-violet: #3C2D62;
+  --ip-white: #FFFFFF;
+  --ip-bg-light: #F8FAFC;
+  --slide-width: 100vw;
+  --slide-height: 100vh;
+}
+
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: 'Inter', 'Roboto', sans-serif;
+  color: var(--ip-text-slate);
+  background: var(--ip-white);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* ===== PROGRESS BAR ===== */
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--ip-primary-dark) 0%, var(--ip-primary-blue) 100%);
+  z-index: 1000;
+  transition: width 0.3s ease;
+  width: 0%;
+}
+
+/* ===== NAV DOTS ===== */
+.nav-dots {
+  position: fixed;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 999;
+}
+
+.nav-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--ip-accent-purple);
+  border: 2px solid var(--ip-accent-purple);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-dot:hover {
+  background: var(--ip-primary-blue);
+  border-color: var(--ip-primary-blue);
+  transform: scale(1.3);
+}
+
+.nav-dot.active {
+  background: var(--ip-primary-dark);
+  border-color: var(--ip-primary-dark);
+  transform: scale(1.3);
+}
+
+.nav-dot .tooltip {
+  position: absolute;
+  right: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--ip-primary-dark);
+  color: var(--ip-white);
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  font-family: 'Inter', sans-serif;
+}
+
+.nav-dot:hover .tooltip { opacity: 1; }
+
+/* ===== EXPORT BUTTONS ===== */
+.export-buttons {
+  position: fixed;
+  top: 16px;
+  right: 60px;
+  display: flex;
+  gap: 8px;
+  z-index: 999;
+}
+
+.export-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.export-btn--pdf {
+  background: var(--ip-primary-dark);
+  color: var(--ip-white);
+}
+
+.export-btn--pdf:hover { background: var(--ip-accent-violet); }
+
+/* ===== SLIDE BASE ===== */
+.slide {
+  width: 100vw;
+  height: 100vh;
+  scroll-snap-align: start;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.slide__content {
+  flex: 1;
+  padding: 60px 80px 40px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.slide__footer {
+  height: 4px;
+  min-height: 4px;
+  background: linear-gradient(90deg, #1C1340 0%, #2D1B69 40%, #4169E1 100%);
+  flex-shrink: 0;
+}
+
+/* ===== COVER SLIDE ===== */
+.slide--cover {
+  background: linear-gradient(135deg, var(--ip-primary-dark) 0%, #1a1145 40%, var(--ip-accent-violet) 70%, var(--ip-primary-blue) 100%);
+  color: var(--ip-white);
+  position: relative;
+  overflow: hidden;
+}
+
+.slide--cover::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 60%;
+  height: 140%;
+  background: radial-gradient(ellipse at center, rgba(65,105,225,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.slide--cover::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -20%;
+  width: 60%;
+  height: 80%;
+  background: radial-gradient(ellipse at center, rgba(199,191,232,0.1) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.slide--cover .slide__content {
+  justify-content: space-between;
+  padding: 56px 80px;
+  position: relative;
+  z-index: 2;
+}
+
+.cover__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.cover__logo {
+  height: 48px;
+  width: auto;
+}
+
+.cover__main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 800px;
+}
+
+.cover__eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--ip-accent-purple);
+  margin-bottom: 20px;
+}
+
+.cover__title {
+  font-family: 'Raleway', sans-serif;
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1.12;
+  margin-bottom: 20px;
+  color: var(--ip-white);
+}
+
+.cover__subtitle {
+  font-family: 'Roboto', sans-serif;
+  font-size: 17px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 650px;
+  line-height: 1.6;
+}
+
+.cover__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.cover__meta {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.cover__decoration {
+  display: flex;
+  gap: 8px;
+}
+
+.cover__decoration span {
+  width: 40px;
+  height: 4px;
+  background: var(--ip-primary-blue);
+  border-radius: 2px;
+  opacity: 0.6;
+}
+
+.cover__decoration span:first-child {
+  opacity: 1;
+  width: 60px;
+}
+
+/* ===== TABLE OF CONTENTS ===== */
+.toc {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  flex: 1;
+  align-content: center;
+}
+
+.toc__column {
+  display: flex;
+  flex-direction: column;
+}
+
+.toc__group-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--ip-primary-blue);
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--ip-primary-blue);
+}
+
+.toc__item {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.toc__item:hover {
+  background: var(--ip-bg-light);
+  padding-left: 18px;
+}
+
+.toc__item:hover .toc__title {
+  color: var(--ip-primary-blue);
+}
+
+.toc__num {
+  font-family: 'Raleway', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ip-accent-purple);
+  min-width: 26px;
+  text-align: right;
+}
+
+.toc__title {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--ip-text-slate);
+  transition: color 0.2s ease;
+}
+
+.toc__item--divider .toc__title {
+  font-weight: 600;
+  color: var(--ip-primary-dark);
+}
+
+/* ===== CONTENT SLIDES ===== */
+.slide--content {
+  background: var(--ip-white);
+}
+
+.slide--compact .slide__content {
+  padding: 48px 64px 32px;
+}
+
+.slide__header {
+  margin-bottom: 28px;
+  flex-shrink: 0;
+}
+
+.slide__title {
+  font-family: 'Raleway', sans-serif;
+  font-size: 34px;
+  font-weight: 800;
+  color: var(--ip-primary-dark);
+  margin-bottom: 6px;
+}
+
+.slide__subtitle {
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--ip-text-muted);
+  line-height: 1.5;
+}
+
+/* ===== DIVIDER SLIDE ===== */
+.slide--divider {
+  background: linear-gradient(135deg, var(--ip-primary-dark) 0%, var(--ip-accent-violet) 60%, var(--ip-primary-blue) 100%);
+  color: var(--ip-white);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.slide--divider .slide__content {
+  justify-content: center;
+  align-items: center;
+}
+
+.divider__eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--ip-accent-purple);
+  margin-bottom: 16px;
+}
+
+.divider__title {
+  font-family: 'Raleway', sans-serif;
+  font-size: 44px;
+  font-weight: 800;
+  color: var(--ip-white);
+  margin-bottom: 16px;
+}
+
+.divider__subtitle {
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 640px;
+}
+
+/* ===== CARDS ===== */
+.feature-card {
+  background: var(--ip-white);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.feature-card__heading {
+  font-family: 'Raleway', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ip-primary-dark);
+  margin-bottom: 10px;
+}
+
+.feature-card__body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 13.5px;
+  color: var(--ip-text-muted);
+  line-height: 1.6;
+}
+
+.column-card {
+  background: var(--ip-white);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.column-card__title {
+  font-family: 'Raleway', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ip-primary-dark);
+  margin-bottom: 14px;
+}
+
+/* ===== BORDER ACCENTS ===== */
+.border-blue { border-top: 3px solid var(--ip-primary-blue); }
+.border-dark { border-top: 3px solid var(--ip-primary-dark); }
+.border-purple { border-top: 3px solid var(--ip-accent-violet); }
+.border-green { border-top: 3px solid #059669; }
+.border-red { border-top: 3px solid #EF4444; }
+.border-amber { border-top: 3px solid #D97706; }
+
+/* ===== GRID LAYOUTS ===== */
+.grid-2x2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  flex: 1;
+}
+
+.grid-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  flex: 1;
+}
+
+.grid-3x2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  flex: 1;
+}
+
+.grid-3col {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
+
+.grid-4col {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 16px;
+}
+
+/* ===== TABLES ===== */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+}
+
+.data-table thead th {
+  background: var(--ip-primary-dark);
+  color: var(--ip-white);
+  padding: 10px 14px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.data-table thead th:first-child { border-radius: 8px 0 0 0; }
+.data-table thead th:last-child { border-radius: 0 8px 0 0; }
+
+.data-table tbody td {
+  padding: 9px 14px;
+  border-bottom: 1px solid #E2E8F0;
+  color: var(--ip-text-slate);
+  font-size: 13px;
+}
+
+.data-table tbody tr:last-child td { border-bottom: none; }
+.data-table tbody tr:hover { background: #F1F5F9; }
+
+.data-table .highlight-row {
+  background: rgba(65, 105, 225, 0.06);
+  font-weight: 600;
+}
+
+.data-table .highlight-row td {
+  color: var(--ip-primary-dark);
+  border-bottom-color: var(--ip-primary-blue);
+}
+
+.data-table .highlight-row:hover {
+  background: rgba(65, 105, 225, 0.1);
+}
+
+.data-table--compact { font-size: 12px; }
+.data-table--compact thead th { padding: 8px 10px; font-size: 11px; }
+.data-table--compact tbody td { padding: 7px 10px; font-size: 12px; }
+
+/* ===== COLOR INDICATORS ===== */
+.text-positive { color: #22c55e; font-weight: 600; }
+.text-negative { color: #ef4444; font-weight: 600; }
+.text-warning { color: #D97706; font-weight: 600; }
+
+/* ===== CALLOUT BOX ===== */
+.callout {
+  background: var(--ip-bg-light);
+  border-left: 4px solid var(--ip-primary-blue);
+  border-radius: 0 8px 8px 0;
+  padding: 16px 20px;
+  margin-top: 16px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 13px;
+  color: var(--ip-text-muted);
+  line-height: 1.6;
+  flex-shrink: 0;
+}
+
+.callout strong { color: var(--ip-primary-dark); }
+
+/* ===== CARD LIST ===== */
+.card-list {
+  list-style: none;
+  padding: 0;
+}
+
+.card-list li {
+  position: relative;
+  padding: 4px 0 4px 18px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 13px;
+  color: var(--ip-text-muted);
+  line-height: 1.55;
+}
+
+.card-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 12px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ip-primary-blue);
+}
+
+.card-list--checklist li::before {
+  content: '';
+  width: 11px;
+  height: 11px;
+  border-radius: 2px;
+  border: 1.5px solid #CBD5E1;
+  background: transparent;
+  top: 8px;
+}
+
+.card-list--checklist li {
+  padding-left: 22px;
+}
+
+.card-list--checklist li.is-checked::before {
+  content: '\2713';
+  border-color: #059669;
+  background: #059669;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.card-list--checklist li.is-checked {
+  color: var(--ip-text-light);
+}
+
+/* ===== PILLAR CARD ===== */
+.pillar-card {
+  background: var(--ip-white);
+  border-radius: 12px;
+  padding: 20px 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+}
+
+.pillar-card__number {
+  font-family: 'Raleway', sans-serif;
+  font-size: 40px;
+  font-weight: 800;
+  color: var(--ip-accent-purple);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.pillar-card__title {
+  font-family: 'Raleway', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ip-primary-dark);
+  margin-bottom: 8px;
+}
+
+.pillar-card__desc {
+  font-family: 'Roboto', sans-serif;
+  font-size: 13px;
+  color: var(--ip-text-muted);
+  line-height: 1.55;
+  flex: 1;
+}
+
+.pillar-card__audiences {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.audience-tag {
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.audience-tag--energy { background: #FEF3C7; color: #92400E; }
+.audience-tag--manufacturing { background: #FCE7F3; color: #9D174D; }
+.audience-tag--datacenters { background: #EEF2FF; color: #4338CA; }
+.audience-tag--healthcare { background: #ECFDF5; color: #065F46; }
+.audience-tag--cxo { background: #EDE9FE; color: #5B21B6; }
+.audience-tag--board { background: #FEF3C7; color: #92400E; }
+.audience-tag--counsel { background: #DBEAFE; color: #1E40AF; }
+.audience-tag--all { background: #F1F5F9; color: #334155; }
+
+/* Practice Pillar Tags */
+.practice-pillar-tag {
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+.practice-pillar-tag--legal { background: #1C1340; color: #FFFFFF; }
+.practice-pillar-tag--lobbying { background: #4169E1; color: #FFFFFF; }
+.practice-pillar-tag--comms { background: #3C2D62; color: #FFFFFF; }
+
+.pillar-card__practice-pillars {
+  margin-top: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+}
+
+.pillar-mapping-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--ip-text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 8px;
+  margin-bottom: 3px;
+}
+
+.topic-tag {
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.topic-tag--regulatory { background: #DBEAFE; color: #1E40AF; }
+.topic-tag--pfas { background: #FEE2E2; color: #991B1B; }
+.topic-tag--climate { background: #D1FAE5; color: #065F46; }
+.topic-tag--energy { background: #FEF3C7; color: #92400E; }
+.topic-tag--credibility { background: #EDE9FE; color: #5B21B6; }
+
+/* ===== STAT BLOCK ===== */
+.stat-block {
+  text-align: center;
+  padding: 16px;
+}
+
+.stat-block__value {
+  font-family: 'Raleway', sans-serif;
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--ip-primary-dark);
+}
+
+.stat-block__label {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: var(--ip-text-light);
+  margin-top: 4px;
+}
+
+/* ===== ALGO INSIGHT TAG ===== */
+.algo-tag {
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: #EEF2FF;
+  color: #4338CA;
+  margin-bottom: 6px;
+}
+
+/* ===== THANKYOU SLIDE ===== */
+.slide--thankyou {
+  background: linear-gradient(135deg, var(--ip-primary-dark) 0%, #1a1145 40%, var(--ip-accent-violet) 70%, var(--ip-primary-blue) 100%);
+  color: var(--ip-white);
+  position: relative;
+  overflow: hidden;
+}
+
+.slide--thankyou::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 60%;
+  height: 140%;
+  background: radial-gradient(ellipse at center, rgba(65,105,225,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.slide--thankyou .slide__content {
+  justify-content: space-between;
+  align-items: center;
+  padding: 56px 80px;
+  position: relative;
+  z-index: 2;
+}
+
+.thankyou__title {
+  font-family: 'Raleway', sans-serif;
+  font-size: 56px;
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+
+.thankyou__subtitle {
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 40px;
+}
+
+.thankyou__contact {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: rgba(255,255,255,0.5);
+}
+
+/* ===== DATA-DENSE SLIDE VARIANT ===== */
+.slide--dense .slide__content {
+  padding: 36px 52px 20px;
+}
+
+.slide--dense .slide__header {
+  margin-bottom: 14px;
+}
+
+.slide--dense .slide__title {
+  font-size: 28px;
+  margin-bottom: 3px;
+}
+
+.slide--dense .slide__subtitle {
+  font-size: 13px;
+}
+
+.slide--dense .grid-2col { gap: 14px; }
+.slide--dense .grid-2x2 { gap: 14px; }
+.slide--dense .grid-3x2 { gap: 14px; }
+
+.slide--dense .column-card {
+  padding: 14px 16px;
+}
+
+.slide--dense .column-card__title {
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.slide--dense .data-table--compact thead th {
+  padding: 5px 8px;
+  font-size: 10px;
+}
+
+.slide--dense .data-table--compact tbody td {
+  padding: 4px 8px;
+  font-size: 11px;
+}
+
+.slide--dense .feature-card {
+  padding: 14px 16px;
+}
+
+.slide--dense .feature-card__heading {
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.slide--dense .feature-card__body {
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.slide--dense .callout {
+  padding: 10px 14px;
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+.slide--dense .card-list li {
+  padding: 2px 0 2px 14px;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.slide--dense .card-list li::before {
+  top: 8px;
+  width: 4px;
+  height: 4px;
+}
+
+.slide--dense .pillar-card {
+  padding: 16px 18px;
+}
+
+.slide--dense .pillar-card__number {
+  font-size: 24px;
+  margin-bottom: 3px;
+}
+
+.slide--dense .pillar-card__title {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.slide--dense .pillar-card__desc {
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+
+/* ===== PILLAR DEEP DIVE LAYOUT ===== */
+.pillar-layout {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr 0.8fr;
+  gap: 0;
+  flex: 1;
+  min-height: 0;
+}
+
+.pillar-zone {
+  padding: 18px 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.pillar-zone--topics {
+  border-right: 1px solid #E2E8F0;
+  padding-left: 0;
+}
+
+.pillar-zone--context {
+  border-right: 1px solid #E2E8F0;
+}
+
+.pillar-zone--hooks {
+  padding-right: 0;
+}
+
+.pillar-zone__label {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ip-text-light);
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--ip-primary-dark);
+}
+
+.pillar-zone__label--blue { border-bottom-color: var(--ip-primary-blue); }
+.pillar-zone__label--purple { border-bottom-color: var(--ip-accent-violet); }
+.pillar-zone__label--green { border-bottom-color: #059669; }
+.pillar-zone__label--amber { border-bottom-color: #D97706; }
+.pillar-zone__label--red { border-bottom-color: #EF4444; }
+
+.topic-item {
+  margin-bottom: 10px;
+}
+
+.topic-item:last-child { margin-bottom: 0; }
+
+.topic-item__name {
+  font-family: 'Raleway', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ip-primary-dark);
+  margin-bottom: 1px;
+}
+
+.topic-item__desc {
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+  color: var(--ip-text-muted);
+  line-height: 1.45;
+}
+
+.context-row {
+  display: flex;
+  align-items: baseline;
+  padding: 6px 0;
+  border-bottom: 1px solid #F1F5F9;
+}
+
+.context-row:last-child { border-bottom: none; }
+
+.context-row__audience {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--ip-primary-blue);
+  width: 72px;
+  flex-shrink: 0;
+}
+
+.context-row__text {
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+  color: var(--ip-text-slate);
+  line-height: 1.45;
+}
+
+.hook-item {
+  position: relative;
+  padding: 10px 0 10px 16px;
+  border-bottom: 1px solid #F1F5F9;
+}
+
+.hook-item:last-child { border-bottom: none; }
+
+.hook-item::before {
+  content: '\201C';
+  position: absolute;
+  left: 0;
+  top: 4px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--ip-accent-purple);
+  line-height: 1;
+}
+
+.hook-item__text {
+  font-family: 'Roboto', sans-serif;
+  font-size: 12.5px;
+  color: var(--ip-text-slate);
+  line-height: 1.5;
+  font-style: italic;
+}
+
+/* ===== VS BOX ===== */
+.vs-box {
+  background: var(--ip-bg-light);
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin-bottom: 10px;
+}
+
+.vs-box__label {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ip-text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.vs-box__values {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.vs-box__stat {
+  font-family: 'Raleway', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ip-primary-dark);
+}
+
+.vs-box__desc {
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+  color: var(--ip-text-muted);
+  margin-top: 6px;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.appendix-badge {
+  display: inline-block;
+  background: var(--ip-accent-purple);
+  color: var(--ip-primary-dark);
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 4px;
+  margin-left: 12px;
+  vertical-align: middle;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.text-neutral { color: var(--ip-text-muted); }
+
+/* ===== ANIMATIONS ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ===== PRINT STYLES ===== */
+@media print {
+  @page {
+    margin: 0;
+    size: letter landscape;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  html {
+    scroll-snap-type: none !important;
+    scroll-behavior: auto !important;
+  }
+  .slide {
+    width: 100% !important;
+    height: 100vh !important;
+    max-height: 100vh !important;
+    scroll-snap-align: none !important;
+    overflow: hidden !important;
+    page-break-after: always;
+    break-after: page;
+    position: relative !important;
+  }
+  .slide__content {
+    overflow: hidden !important;
+  }
+  .slide:last-of-type {
+    page-break-after: auto !important;
+    break-after: auto !important;
+  }
+  .progress-bar,
+  .nav-dots,
+  .export-buttons {
+    display: none !important;
+  }
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+  body {
+    overflow: visible !important;
+  }
+  .feature-card,
+  .column-card,
+  .pillar-card,
+  .callout,
+  .data-table {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .grid-3col,
+  .grid-3x2,
+  .grid-4col {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  /* Strategic Thesis slide: shrink content to fit one page */
+  .slide[data-slide-title="Strategic Thesis"] .feature-card[style*="border-top:4px solid var(--ip-primary-blue)"] {
+    padding: 24px 40px !important;
+    margin-bottom: 16px !important;
+  }
+  .slide[data-slide-title="Strategic Thesis"] .feature-card[style*="border-top:4px solid var(--ip-primary-blue)"] h3 {
+    font-size: 22px !important;
+    margin-bottom: 10px !important;
+  }
+  .slide[data-slide-title="Strategic Thesis"] .feature-card[style*="border-top:4px solid var(--ip-primary-blue)"] p {
+    font-size: 13px !important;
+  }
+  .slide[data-slide-title="Strategic Thesis"] .grid-3col .feature-card__body {
+    font-size: 11.5px !important;
+    line-height: 1.5 !important;
+  }
+  .slide[data-slide-title="Strategic Thesis"] .grid-3col .feature-card {
+    padding: 16px !important;
+  }
+  .slide--cover::before,
+  .slide--cover::after,
+  .slide--thankyou::before {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  .toc__item {
+    cursor: default !important;
+    padding-left: 8px !important;
+  }
+  .toc__item:hover {
+    background: transparent !important;
+    padding-left: 8px !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- PROGRESS BAR -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- NAV DOTS -->
+<nav class="nav-dots" id="navDots"></nav>
+
+<!-- EXPORT BUTTONS -->
+<div class="export-buttons">
+  <button class="export-btn export-btn--pdf" onclick="window.print()">
+    <span>&#128196;</span> PDF
+  </button>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 1: COVER -->
+<!-- ============================================================ -->
+<section class="slide slide--cover" data-slide-title="Cover">
+  <div class="slide__content">
+    <div class="cover__header">
+      <div class="reveal" style="font-family:'Raleway',sans-serif; font-size:18px; font-weight:700; color:var(--ip-accent-purple); letter-spacing:1px;">INNOVAITION PARTNERS</div>
+    </div>
+    <div class="cover__main">
+      <p class="cover__eyebrow reveal">LinkedIn Content Strategy</p>
+      <h1 class="cover__title reveal reveal-delay-1">Bracewell LLP<br>Environmental Practice</h1>
+      <p class="cover__subtitle reveal reveal-delay-2">Content architecture, audience mapping, and pillar strategy built on three practice pillars: legal analysis, lobbying &amp; policy work, and strategic communications &bull; 90-Day Pilot &bull; February 2026</p>
+    </div>
+    <div class="cover__footer">
+      <div class="cover__meta reveal reveal-delay-3">Prepared by InnovAItion Partners &bull; February 2026</div>
+      <div class="cover__decoration reveal reveal-delay-3">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 2: TABLE OF CONTENTS -->
+<!-- ============================================================ -->
+<section class="slide slide--content slide--compact" data-slide-title="Contents">
+  <div class="slide__content">
+    <div class="slide__header reveal">
+      <h2 class="slide__title">Contents</h2>
+    </div>
+    <div class="toc reveal reveal-delay-1">
+      <div class="toc__column">
+        <div class="toc__group-label">Strategy</div>
+        <a class="toc__item" onclick="goToSlide('Program Goals')"><span class="toc__num">01</span><span class="toc__title">Program Goals</span></a>
+        <a class="toc__item" onclick="goToSlide('Priority Audiences')"><span class="toc__num">02</span><span class="toc__title">Priority Audiences</span></a>
+        <a class="toc__item" onclick="goToSlide('Your Baseline')"><span class="toc__num">03</span><span class="toc__title">Where You Are Today</span></a>
+        <a class="toc__item" onclick="goToSlide('Algorithm Insight')"><span class="toc__num">04</span><span class="toc__title">Algorithm Insight</span></a>
+        <a class="toc__item" onclick="goToSlide('Strategic Thesis')"><span class="toc__num">05</span><span class="toc__title">Strategic Thesis</span></a>
+        <a class="toc__item" onclick="goToSlide('Content Pillars')"><span class="toc__num">06</span><span class="toc__title">Content Pillars</span></a>
+        <a class="toc__item" onclick="goToSlide('Signature Formats')"><span class="toc__num">07</span><span class="toc__title">Signature Formats</span></a>
+        <a class="toc__item" onclick="goToSlide('Cadence')"><span class="toc__num">08</span><span class="toc__title">Cadence &amp; Testing</span></a>
+        <a class="toc__item" onclick="goToSlide('30-Day Launch')"><span class="toc__num">09</span><span class="toc__title">30-Day Launch Plan</span></a>
+        <a class="toc__item" onclick="goToSlide('Partner Activation')"><span class="toc__num">10</span><span class="toc__title">Partner Activation</span></a>
+        <a class="toc__item" onclick="goToSlide('Engagement Engine')"><span class="toc__num">11</span><span class="toc__title">Engagement Engine</span></a>
+        <a class="toc__item" onclick="goToSlide('Next Steps')"><span class="toc__num">12</span><span class="toc__title">Next Steps</span></a>
+      </div>
+      <div class="toc__column">
+        <div class="toc__group-label">Appendix</div>
+        <a class="toc__item" onclick="goToSlide('Competitor Benchmark')"><span class="toc__num">A1</span><span class="toc__title">Competitor Benchmark</span></a>
+        <a class="toc__item" onclick="goToSlide('Audience Pain Points')"><span class="toc__num">A2</span><span class="toc__title">Audience Pain Points</span></a>
+        <a class="toc__item" onclick="goToSlide('Individual Leaders')"><span class="toc__num">A3</span><span class="toc__title">Individual Leader Benchmarks</span></a>
+        <a class="toc__item" onclick="goToSlide('Your 2026 Content')"><span class="toc__num">A4</span><span class="toc__title">Your 2026 Content Performance</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="slide__footer"></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 3: PROGRAM GOALS -->
+<!-- ============================================================ -->
+<section class="slide slide--content slide--compact" data-slide-title="Program Goals">
+  <div class="slide__content">
+    <div class="slide__header reveal">
+      <h2 class="slide__title">Program Goals</h2>
+      <p class="slide__subtitle">A strong national practice anchored in Houston/Texas and Washington, D.C. &mdash; built on three pillars: <strong>legal analysis</strong>, <strong>lobbying &amp; policy work</strong>, and <strong>strategic communications</strong></p>
+    </div>
+    <div class="reveal reveal-delay-1" style="flex:1; display:flex; flex-direction:column; justify-content:flex-start; max-width:900px;">
+      <!-- Goal 1 -->
+      <div style="display:flex; align-items:flex-start; gap:20px; padding:20px 0; border-bottom:1px solid #E2E8F0;">
+        <div style="width:40px; min-width:40px; height:40px; border-radius:50%; background:var(--ip-primary-blue); color:#fff; font-family:'Raleway',sans-serif; font-weight:800; font-size:17px; display:flex; align-items:center; justify-content:center; margin-top:1px;">1</div>
+        <div>
+          <h3 style="font-family:'Raleway',sans-serif; font-weight:700; font-size:17px; color:var(--ip-primary-dark); margin-bottom:4px;">Close the Engagement Gap</h3>
+          <p style="font-family:'Roboto',sans-serif; font-size:13.5px; color:var(--ip-text-muted); line-height:1.55;">Move avg engagement per environmental post from 10.7 to 25+ by shifting from link-promo to narrative-driven content across five focus areas: <strong>permitting reform</strong>, <strong>environmental audits</strong>, <strong>PFAS</strong>, <strong>climate disclosure</strong>, and <strong>clean air</strong>. Increase post length from 56&ndash;93 words to 120&ndash;160 words.</p>
+        </div>
+      </div>
+      <!-- Goal 2 -->
+      <div style="display:flex; align-items:flex-start; gap:20px; padding:20px 0; border-bottom:1px solid #E2E8F0;">
+        <div style="width:40px; min-width:40px; height:40px; border-radius:50%; background:var(--ip-primary-dark); color:#fff; font-family:'Raleway',sans-serif; font-weight:800; font-size:17px; display:flex; align-items:center; justify-content:center; margin-top:1px;">2</div>
+        <div>
+          <h3 style="font-family:'Raleway',sans-serif; font-weight:700; font-size:17px; color:var(--ip-primary-dark); margin-bottom:4px;">Expand Audience Reach</h3>
+          <p style="font-family:'Roboto',sans-serif; font-size:13.5px; color:var(--ip-text-muted); line-height:1.55;">Speak to what C-suite, boards, and in-house counsel actually worry about. Expand environmental subthemes from 2 (Policy, Carbon) to 5+ (add ESG Strategy, Energy Transition, Renewables).</p>
+        </div>
+      </div>
+      <!-- Goal 3 -->
+      <div style="display:flex; align-items:flex-start; gap:20px; padding:20px 0; border-bottom:1px solid #E2E8F0;">
+        <div style="width:40px; min-width:40px; height:40px; border-radius:50%; background:var(--ip-accent-violet); color:#fff; font-family:'Raleway',sans-serif; font-weight:800; font-size:17px; display:flex; align-items:center; justify-content:center; margin-top:1px;">3</div>
+        <div>
+          <h3 style="font-family:'Raleway',sans-serif; font-weight:700; font-size:17px; color:var(--ip-primary-dark); margin-bottom:4px;">Activate Partner Thought Leadership</h3>
+          <p style="font-family:'Roboto',sans-serif; font-size:13.5px; color:var(--ip-text-muted); line-height:1.55;">Launch 2&ndash;4 partner posts per month from individual profiles (Jason Hut, Seth Barsky, +1 TBD). Build the Sidley Austin playbook: expert voice drives 5&ndash;10&times; company page reach.</p>
+        </div>
+      </div>
+      <!-- Goal 4 -->
+      <div style="display:flex; align-items:flex-start; gap:20px; padding:20px 0;">
+        <div style="width:40px; min-width:40px; height:40px; border-radius:50%; background:#D97706; color:#fff; font-family:'Raleway',sans-serif; font-weight:800; font-size:17px; display:flex; align-items:center; justify-content:center; margin-top:1px;">4</div>
+        <div>
+          <h3 style="font-family:'Raleway',sans-serif; font-weight:700; font-size:17px; color:var(--ip-primary-dark); margin-bottom:4px;">Build a Repeatable System</h3>
+          <p style="font-family:'Roboto',sans-serif; font-size:13.5px; color:var(--ip-text-muted); line-height:1.55;">Create content workflows, AI tools, and employee advocacy cadences that scale beyond Environmental to other Bracewell practices. Drive BD leads, website referral traffic, and positive lawyer feedback.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide__footer"></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 4: PRIORITY AUDIENCES -->
+<!-- ============================================================ -->
+<section class="slide slide--content slide--compact" data-slide-title="Priority Audiences">
+  <div class="slide__content">
+    <div class="slide__header reveal">
+      <h2 class="slide__title">Priority Audiences</h2>
+      <p class="slide__subtitle">Four industries &times; three stakeholder tiers = 12 segments. Every post should speak directly to at least one.</p>
+    </div>
+    <div class="grid-2x2" style="flex:1;">
+      <div class="column-card reveal reveal-delay-1" style="border-top:3px solid #92400E;">
+        <h3 class="column-card__title" style="color:#92400E;">&#9889; Energy</h3>
+        <p style="font-size:12px;color:var(--ip-text-light);font-family:'Inter',sans-serif;margin-bottom:8px;">Tier 1 &mdash; Core client base. Broadest range of environmental issues.</p>
+        <ul class="card-list">
+          <li><strong>Endangerment Finding rescission</strong>: Clean Air Act uncertainty for existing permits</li>
+          <li><strong>State enforcement acceleration</strong>: 76% decline in federal civil lawsuits, but state AGs filling the gap</li>
+          <li><strong>Permitting reform</strong>: NEPA changes creating project-by-project uncertainty</li>
+          <li><strong>Climate disclosure</strong>: CA SB 253/261 Scope 1/2 reporting by Aug 2026</li>
+        </ul>
+      </div>
+      <div class="column-card reveal reveal-delay-1" style="border-top:3px solid #9D174D;">
+        <h3 class="column-card__title" style="color:#9D174D;">&#127981; Heavy Manufacturing</h3>
+        <p style="font-size:12px;color:var(--ip-text-light);font-family:'Inter',sans-serif;margin-bottom:8px;">Tier 1 &mdash; PFAS liability is existential. Massive regulatory exposure.</p>
+        <ul class="card-list">
+          <li><strong>PFAS TSCA reporting</strong>: April 2026 deadline, data required back to 2011</li>
+          <li><strong>50-state EPR patchwork</strong>: no federal floor, each state different</li>
+          <li><strong>CERCLA strict liability</strong>: joint-and-several for legacy contamination</li>
+          <li><strong>Supply chain data gaps</strong>: can&rsquo;t report what you can&rsquo;t track</li>
+        </ul>
+      </div>
+      <div class="column-card reveal reveal-delay-2" style="border-top:3px solid #4338CA;">
+        <h3 class="column-card__title" style="color:#4338CA;">&#128187; Data Centers</h3>
+        <p style="font-size:12px;color:var(--ip-text-light);font-family:'Inter',sans-serif;margin-bottom:8px;">Tier 2 &mdash; Fastest-growing practice area. $98B in projects at risk.</p>
+        <ul class="card-list">
+          <li><strong>300+ state bills filed</strong> in first 6 weeks of 2026; moratoriums enacted</li>
+          <li><strong>Water consumption scrutiny</strong>: community opposition intensifying</li>
+          <li><strong>Air permitting challenges</strong>: backup generator emissions under EPA review</li>
+          <li><strong>Energy demand doubling</strong> by 2027 &mdash; grid reliability pressure</li>
+        </ul>
+      </div>
+      <div class="column-card reveal reveal-delay-2" style="border-top:3px solid #065F46;">
+        <h3 class="column-card__title" style="color:#065F46;">&#127973; Healthcare</h3>
+        <p style="font-size:12px;color:var(--ip-text-light);font-family:'Inter',sans-serif;margin-bottom:8px;">Tier 2 &mdash; Unique PFAS and medical waste exposure. Underserved by competitors.</p>
+        <ul class="card-list">
+          <li><strong>PFAS in medical devices</strong>: CERCLA exposure from products never manufactured</li>
+          <li><strong>Pharma waste Subpart P</strong>: new hazardous waste management obligations</li>
+          <li><strong>Sustainability reporting</strong>: patient and investor pressure on ESG credentials</li>
+          <li><strong>Legacy contamination</strong>: hospital site cleanup liability expanding</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="slide__footer"></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 5: WHERE YOU ARE TODAY -->
+<!-- ============================================================ -->
+<section class="slide slide--content slide--dense" data-slide-title="Your Baseline">
+  <div class="slide__content">
+    <div class="slide__header reveal">
+      <h2 class="slide__title">Where You Are Today</h2>
+      <p class="slide__subtitle">Competitor analysis (497 posts, 4 peer firms) + Bracewell&rsquo;s own 2026 environmental content (Jan 1 &ndash; Feb 2026)</p>
+    </div>
+    <div class="grid-4col reveal reveal-delay-1" style="margin-bottom:14px;">
+      <div class="feature-card" style="text-align:center;">
+        <div class="stat-block__value" style="color:#22c55e;">22</div>
+        <div class="stat-block__label">Environmental posts (6 mo.)<br><span style="font-size:10px;color:var(--ip-text-light);">42.3% of peer set (most volume)</span></div>
+      </div>
+      <div class="feature-card" style="text-align:center;">
+        <div class="stat-block__value" style="color:#EF4444;">10.7</div>
+        <div class="stat-block__label">Avg engagement per post<br><span style="font-size:10px;color:var(--ip-text-light);">Hogan Lovells: 80.4</span></div>
+      </div>
+      <div class="feature-card" style="text-align:center;">
+        <div class="stat-block__value" style="color:#D97706;">56 words</div>
+        <div class="stat-block__label">Avg TL word count<br><span style="font-size:10px;color:var(--ip-text-light);">Top peers: 122&ndash;139 words</span></div>
+      </div>
+      <div class="feature-card" style="text-align:center;">
+        <div class="stat-block__value" style="color:#EF4444;">0%</div>
+        <div class="stat-block__label">Events/recap content<br><span style="font-size:10px;color:var(--ip-text-light);">Hogan: 38% (106.7 avg eng)</span></div>
+      </div>
+    </div>
+    <div class="grid-2col reveal reveal-delay-2" style="flex:1;">
+      <div class="column-card">
+        <h3 class="column-card__title">2026 Content Performance (Your Data)</h3>
+        <div class="table-wrapper">
+          <table class="data-table data-table--compact">
+            <thead>
+              <tr><th>Type</th><th>Avg Likes</th><th>Avg Impressions</th></tr>
+            </thead>
+            <tbody>
+              <tr class="highlight-row"><td><strong>Awards</strong></td><td class="text-positive">20.5</td><td class="text-positive">979</td></tr>
+              <tr><td>Events (pre-event)</td><td>3.0</td><td>445</td></tr>
+              <tr><td>Media/TL (link-promo)</td><td class="text-negative">2.3</td><td>325</td></tr>
+              <tr><td>Article/TL</td><td class="text-negative">1.5</td><td>365</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout" style="margin-top:8px;">
+          <span class="algo-tag">Algorithm Insight</span> <strong>The gap is stark:</strong> Awards drive <strong>13&times; the engagement</strong> of link-promo TL. The Law360 Practice Group of the Year post (27 likes, 1,256 impressions) outperformed all other env content combined. TL posts average just 2 likes and zero comments &mdash; the format, not the expertise, is the problem. &ldquo;Teach-before-you-pitch&rdquo; posts see 3&times; higher CTR than promotional content.
+        </div>
+      </div>
+      <div class="column-card">
+        <h3 class="column-card__title">What&rsquo;s Working &amp; Key Gaps</h3>
+        <ul class="card-list">
+          <li><strong>Awards content is a proven winner</strong>: Law360 POTY post &mdash; 27 likes, 1,256 impressions. Lawdragon video &mdash; 14 likes, 701 impressions. Lean into this</li>
+          <li><strong>Volume leadership</strong>: 42% of all env posts across peer set. The instinct to publish is right</li>
+          <li><strong>Share performance</strong>: +71.2% more shares than Bracewell&rsquo;s overall average</li>
+        </ul>
+        <div style="margin-top:10px; padding-top:10px; border-top:1px solid #E2E8F0;">
+          <ul class="card-list">
+            <li><strong>Link-promo TL averaging 2 likes, 0 comments</strong>: the format is the #1 engagement drag &mdash; needs narrative rewrite</li>
+            <li><strong>Events are pre-event promo only</strong>: no post-event recaps. 3 upcoming events (Mar, Apr, May) are the first test</li>
+            <li><strong>Hashtag overuse (95.5%)</strong>: competitors range 0&ndash;50%. Top performers don&rsquo;t use them</li>
+            <li><strong>68% of content covers Policy &amp; Carbon only</strong>: missing ESG Strategy (111.7 avg engagement elsewhere)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide__footer"></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 6: ALGORITHM INSIGHT -->
+<!-- ============================================================ -->
+<section class="slide slide--content slide--compact" data-slide-title="Algorithm Insight">
+  <div class="slide__content">
+    <div class="slide__header reveal">
+      <h2 class="slide__title">How the Algorithm Works for You</h2>
+      <p class="slide__subtitle">LinkedIn&rsquo;s 2025 algorithm shift is the engine behind every recommendation in this deck</p>
+    </div>
+    <div class="feature-card reveal reveal-delay-1" style="text-align:center; padding:28px 48px; border-top:4px solid var(--ip-primary-blue); margin-bottom:20px;">
+      <h3 style="font-family:'Raleway',sans-serif; font-size:24px; font-weight:800; color:var(--ip-primary-dark); line-height:1.3; margin-bottom:12px;">LinkedIn now distributes content by topic, beyond your network.</h3>
+      <p style="font-family:'Roboto',sans-serif; font-size:14px; color:var(--ip-text-muted); max-width:680px; margin:0 auto; line-height:1.65;">In 2025, LinkedIn shifted from a <strong>social graph</strong> (who follows you) to an <strong>interest graph</strong> (what people care about). Every post is classified into topic clusters and tested against audiences who engage with similar themes. For Bracewell, this means: nail 2&ndash;3 environmental topics consistently, and LinkedIn will surface your content to exactly the audience you want &mdash; even if they don&rsquo;t follow you.</p>
+    </div>
+    <div class="grid-3col reveal reveal-delay-2" style="flex:1;">
+      <div class="feature-card">
+        <div class="algo-tag">Algorithm Insight</div>
+        <h3 class="feature-card__heading">Topic Consistency = Reach</h3>
+        <p class="feature-card__body">Creators who repeat 2&ndash;3 core topics for 90 days see <strong>+27% avg reach</strong> and <strong>+41% topic-based follows</strong>. Bracewell&rsquo;s five pillars are designed for exactly this signal: <span class="topic-tag topic-tag--regulatory">Regulatory</span> <span class="topic-tag topic-tag--pfas">PFAS</span> <span class="topic-tag topic-tag--climate">ESG</span> <span class="topic-tag topic-tag--energy">Energy</span> <span class="topic-tag topic-tag--credibility">Credibility</span></p>
+      </div>
+      <div class="feature-card">
+        <div class="algo-tag">Algorithm Insight</div>
+        <h3 class="feature-card__heading">Conversation Is the Currency</h3>
+        <p class="feature-card__body">Comments, saves, and profile clicks now outweigh likes. Posts that inspire long comment threads stay visible for weeks via &ldquo;Suggested for You&rdquo; feeds. <strong>Saves alone increase resurfacing probability by 60%.</strong> Narrative-driven posts earn 2&times; the comments of link-promo.</p>
+      </div>
+      <div class="feature-card">
+        <div class="algo-tag">Algorithm Insight</div>
+        <h3 class="feature-card__heading">Teach &gt; Promote</h3>
+        <p class="feature-card__body">LinkedIn&rsquo;s classifier favors content that educates over content that sells. Across the peer set, thought leadership posts drive <strong>9.4&times; more engagement</strong> than link-promo posts. Hogan&rsquo;s 122-word narrative TL vs. Bracewell&rsquo;s 56-word link-promo tells the whole story.</p>
+      </div>
+    </div>
+    <div class="callout reveal reveal-delay-3">
+      <strong>The shift:</strong> From &ldquo;Check out our latest alert&rdquo; to &ldquo;Here&rsquo;s what the Endangerment Finding rescission actually means for your permits.&rdquo; Same expertise, different packaging. The algorithm (and your audience) will reward the change immediately.
+    </div>
+  </div>
+  <div class="slide__footer"></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 7: STRATEGIC THESIS -->
+<!-- ============================================================ -->
+<section class="slide slide--content slide--compact" data-slide-title="Strategic Thesis">
+  <div class="slide__content">
+    <div class="slide__header reveal">
+      <h2 class="slide__title">The Strategic Thesis</h2>
+      <p class="slide__subtitle">Grounded in Bracewell&rsquo;s three practice pillars: <strong>legal analysis</strong>, <strong>lobbying &amp; policy work</strong>, and <strong>strategic communications</strong></p>
+    </div>
+    <div class="feature-card reveal reveal-delay-1" style="text-align:center; padding:40px 60px; border-top:4px solid var(--ip-primary-blue); margin-bottom:24px;">
+      <h3 style="font-family:'Raleway',sans-serif; font-size:28px; font-weight:800; color:var(--ip-primary-dark); line-height:1.3; margin-bottom:16px;">Share the alert and explain what it means.</h3>
+      <p style="font-family:'Roboto',sans-serif; font-size:15px; color:var(--ip-text-muted); max-width:680px; margin:0 auto; line-height:1.65;">Bracewell&rsquo;s Environmental practice rests on three pillars: <strong>legal analysis</strong>, <strong>lobbying &amp; policy work</strong>, and <strong>strategic communications</strong>. LinkedIn content should reflect all three &mdash; go beyond summarizing regulatory alerts to explain what they mean (legal analysis), frame the policy implications (lobbying), and position the practice as the trusted voice (comms). Bracewell already publishes more environmental content than any competitor. The shift is from link-promo to insight-led narrative that puts the practice&rsquo;s full expertise on display. <span class="algo-tag">Algorithm Insight</span> Educational content earns 3&times; higher CTR than promotional content, and conversational tone drives +48% comment rate.</p>
+    </div>
+    <div class="grid-3col reveal reveal-delay-2" style="flex:1;">
+      <div class="feature-card" style="text-align:center;">
+        <div style="font-size:36px;margin-bottom:8px;">&#9878;&#65039;</div>
+        <h3 class="feature-card__heading">Legal Analysis First</h3>
+        <p class="feature-card__body">Every post should answer: &ldquo;What does this mean for my business?&rdquo; Not &ldquo;Here&rsquo;s what happened.&rdquo; Lead with Bracewell&rsquo;s core strength: rigorous legal analysis translated into plain-language business impact across five focus areas &mdash; permitting reform, environmental audits, PFAS, climate disclosure, and clean air.</p>
+      </div>
+      <div class="feature-card" style="text-align:center;">
+        <div style="font-size:36px;margin-bottom:8px;">&#127963;&#65039;</div>
+        <h3 class="feature-card__heading">Show the Policy Lever</h3>
+        <p class="feature-card__body">Bracewell&rsquo;s lobbying and policy influence work is a differentiator no competitor can match on LinkedIn. Content should reflect this: move past &ldquo;what changed&rdquo; to &ldquo;what&rsquo;s being shaped next&rdquo; &mdash; framing Bracewell as the firm that understands where policy is headed and where it&rsquo;s going.</p>
+      </div>
+      <div class="feature-card" style="text-align:center;">
+        <div style="font-size:36px;margin-bottom:8px;">&#128101;</div>
+        <h3 class="feature-card__heading">Activate the Partners</h3>
+        <p class="feature-card__body">Justin Savage (Sidley) has 28.8K followers posting 6&times;/month. First-person expert voice is the #1 engagement multiplier on LinkedIn. Jason Hut (climate disclosure) and Seth Barsky are ready. Strategic communications pillar comes alive through their voices.</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide__footer"></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 8: DIVIDER - CONTENT PILLARS -->
+<!-- ============================================================ -->
+<section class="slide slide--divider" data-slide-title="Content Pillars">
+  <div class="slide__content">
+    <p class="divider__eyebrow reveal">Section Two</p>
+    <h2 class="divider__title reveal reveal-delay-1">Content Pillars</h2>
+    <p class="divider__subtitle reveal reveal-delay-2">Five topic pillars mapped to Bracewell&rsquo;s practice strengths, audience pain points, and competitive whitespace</p>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 9: PILLAR OVERVIEW -->
+<!-- ============================================================ -->
+<section class="slide slide--content slide--dense" data-slide-title="Pillar Overview">
+  <div class="slide__content">
+    <div class="slide__header reveal">
+      <h2 class="slide__title">Five Topic Pillars</h2>
+      <p class="slide__subtitle">Each pillar maps to practice strengths, audience pain points, and competitive whitespace. Content rotates across pillars weekly.</p>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr 1fr 1fr; gap:14px; flex:1;" class="reveal reveal-delay-1">
+      <div class="pillar-card" style="border-top:3px solid var(--ip-primary-blue);">
+        <div class="pillar-card__number">01</div>
+        <div class="pillar-card__title">Regulatory Pulse</div>
+        <div class="pillar-card__desc">Permitting reform, environmental audits, clean air regulations, state enforcement, Endangerment Finding</div>
+        <div class="pillar-mapping-label">Audiences</div>
+        <div class="pillar-card__audiences">
+          <span class="audience-tag audience-tag--counsel">Counsel</span>
+          <span class="audience-tag audience-tag--cxo">C-Suite</span>
+        </div>
+        <div class="pillar-mapping-label">Practice Pillars</div>
+        <div class="pillar-card__practice-pillars">
+          <span class="practice-pillar-tag practice-pillar-tag--legal">Legal Analysis</span>
+          <span class="practice-pillar-tag practice-pillar-tag--lobbying">Lobbying &amp; Policy</span>
+        </div>
+      </div>
+      <div class="pillar-card" style="border-top:3px solid #EF4444;">
+        <div class="pillar-card__number">02</div>
+        <div class="pillar-card__title">PFAS &amp; Emerging Contaminants</div>
+        <div class="pillar-card__desc">TSCA reporting, CERCLA liability, state bans, industry-specific exposure, supply chain data</div>
+        <div class="pillar-mapping-label">Audiences</div>
+        <div class="pillar-card__audiences">
+          <span class="audience-tag audience-tag--all">All Segments</span>
+        </div>
+        <div class="pillar-mapping-label">Practice Pillars</div>
+        <div class="pillar-card__practice-pillars">
+          <span class="practice-pillar-tag practice-pillar-tag--legal">Legal Analysis</span>
+          <span class="practice-pillar-tag practice-pillar-tag--comms">Comms</span>
+        </div>
+      </div>
+      <div class="pillar-card" style="border-top:3px solid #059669;">
+        <div class="pillar-card__number">03</div>
+        <div class="pillar-card__title">Climate Disclosure &amp; ESG</div>
+        <div class="pillar-card__desc">CA SB 253/261, SEC rules, ESG reporting, greenwashing defense, investor expectations</div>
+        <div class="pillar-mapping-label">Audiences</div>
+        <div class="pillar-card__audiences">
+          <span class="audience-tag audience-tag--cxo">C-Suite</span>
+          <span class="audience-tag audience-tag--board">Board</span>
+        </div>
+        <div class="pillar-mapping-label">Practice Pillars</div>
+        <div class="pillar-card__practice-pillars">
+          <span class="practice-pillar-tag practice-pillar-tag--legal">Legal Analysis</span>
+          <span class="practice-pillar-tag practice-pillar-tag--lobbying">Lobbying &amp; Policy</span>
+          <span class="practice-pillar-tag practice-pillar-tag--comms">Comms</span>
+        </div>
+      </div>
+      <div class="pillar-card" style="border-top:3px solid #D97706;">
+        <div class="pillar-card__number">04</div>
+        <div class="pillar-card__title">Energy Transition &amp; Infrastructure</div>
+        <div class="pillar-card__desc">Renewables permitting, data center challenges, NEPA reform, IRA tax credits</div>
+        <div class="pillar-mapping-label">Audiences</div>
+        <div class="pillar-card__audiences">
+          <span class="audience-tag audience-tag--energy">Energy</span>
+          <span class="audience-tag audience-tag--datacenters">Data Centers</span>
+        </div>
+        <div class="pillar-mapping-label">Practice Pillars</div>
+        <div class="pillar-card__practice-pillars">
+          <span class="practice-pillar-tag practice-pillar-tag--legal">Legal Analysis</span>
+          <span class="practice-pillar-tag practice-pillar-tag--lobbying">Lobbying &amp; Policy</span>
+        </div>
+      </div>
+      <div class="pillar-card" style="border-top:3px solid var(--ip-accent-violet);">
+        <div class="pillar-card__number">05</div>
+        <div class="pillar-card__title">Practice Credibility &amp; People</div>
+        <div class="pillar-card__desc">Awards, conference recaps, partner milestones, media coverage, podcast</div>
+        <div class="pillar-mapping-label">Audiences</div>
+        <div class="pillar-card__audiences">
+          <span class="audience-tag audience-tag--all">All Segments</span>
+        </div>
+        <div class="pillar-mapping-label">Practice Pillars</div>
+        <div class="pillar-card__practice-pillars">
+          <span class="practice-pillar-tag practice-pillar-tag--comms">Comms</span>
+        </div>
+      </div>
+    </div>
+    <div class="callout reveal reveal-delay-2" style="margin-top:auto;">
+      <span class="algo-tag">Algorithm Insight</span> <strong>Why five pillars?</strong> Each pillar maps directly to the practice&rsquo;s five named focus areas &mdash; permitting reform, environmental audits, PFAS, climate disclosure, and clean air &mdash; while reflecting the three practice pillars of legal analysis, lobbying &amp; policy work, and strategic communications. Creators who repeat 2&ndash;3 core topics for 90 days see +27% average reach and +41% topic-based follows. LinkedIn&rsquo;s interest graph rewards this thematic consistency, building &ldquo;topic trust&rdquo; that surfaces Bracewell to the right audiences automatically.
+    </div>
+  </div>
+  <div class="slide__footer"></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 10: PILLAR 1 DEEP DIVE -->
+<!-- ============================================================ -->
+<section class="slide slide--content slide--dense" data-slide-title="Pillar 1: Regulatory Pulse">
+  <div class="slide__content">
+    <div class="slide__header reveal">
+      <h2 class="slide__title">Pillar 1: Regulatory Pulse</h2>
+      <p class="slide__subtitle">Permitting reform, environmental audits, clean air, state enforcement &bull; 2&ndash;3 posts/week</p>
+    </div>
+    <div class="pillar-layout reveal reveal-delay-1">
+      <div class="pillar-zone pillar-zone--topics">
+        <div class="pillar-zone__label pillar-zone__label--blue">Core Topics</div>
+        <div class="topic-item">
+          <div class="topic-item__name">Permitting Reform</div>
+          <div class="topic-item__desc">NEPA after CEQ: agency-by-agency permitting in a regulatory vacuum. A named practice focus area.</div>
+        </div>
+        <div class="topic-item">
+          <div class="topic-item__name">Environmental Audits</div>
+          <div class="topic-item__desc">Proactive compliance audits, audit privilege and disclosure mechanics, self-reporting strategies. A named practice focus area.</div>
+        </div>
+        <div class="topic-item">
+          <div class="topic-item__name">Clean Air Regulations</div>
+          <div class="topic-item__desc">Endangerment Finding rescission, existing permit requirements, technology-specific compliance. A named practice focus area.</div>
+        </div>
+        <div class="topic-item">
+          <div class="topic-item__name">State Enforcement Acceleration</div>
+          <div class="topic-item__desc">76% decline in federal civil lawsuits, but citizen suits up 15% and state AGs filling the gap</div>
+        </div>
+      </div>
+      <div class="pillar-zone pillar-zone--context">
+        <div class="pillar-zone__label pillar-zone__label--purple">Audience Context</div>
+        <div class="context-row">
+          <span class="context-row__audience">C-Suite</span>
+          <span class="context-row__text">Strategic planning implications &mdash; how regulatory shifts and audit findings affect capital allocation and risk posture</span>
+        </div>
+        <div class="context-row">
+          <span class="context-row__audience">Board</span>
+          <span class="context-row__text">Oversight of compliance governance &mdash; when to commission audits, how to maintain privilege, disclosure obligations</span>
+        </div>
+        <div class="context-row">
+          <span class="context-row__audience">Counsel</span>
+          <span class="context-row__text">Audit privilege mechanics, permit modifications, agency-by-agency NEPA procedures, enforcement defense</span>
+        </div>
+      </div>
+      <div class="pillar-zone pillar-zone--hooks">
+        <div class="pillar-zone__label pillar-zone__label--green">Sample Hooks</div>
+        <div class="hook-item">
+          <div class="hook-item__text">The EPA rescinded the Endangerment Finding last month. But your existing Clean Air Act permits? Still in effect. Here&rsquo;s why that distinction matters...</div>
+        </div>
+        <div class="hook-item">
+          <div class="hook-item__text">Environmental audits can save your company millions &mdash; or expose it to liability. The difference is how you structure privilege before you start...</div>
+        </div>
+        <div class="hook-item">
+          <div class="hook-item__text">NEPA reform passed. But without CEQ guidance, each agency is making its own permitting rules. Here&rsquo;s the map...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide__footer"></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 11: PILLAR 2 DEEP DIVE -->
+<!-- ============================================================ -->
+<section class="slide slide--content slide--dense" data-slide-title="Pillar 2: PFAS">
+  <div class="slide__content">
+    <div class="slide__header reveal">
+      <h2 class="slide__title">Pillar 2: PFAS &amp; Emerging Contaminants</h2>
+      <p class="slide__subtitle">The #1 pain point across all 12 audience segments &bull; 1&ndash;2 posts/week</p>
+    </div>
+    <div class="pillar-layout reveal reveal-delay-1">
+      <div class="pillar-zone pillar-zone--topics">
+        <div class="pillar-zone__label pillar-zone__label--red">Core Topics</div>
+        <div class="topic-item">
+          <div class="topic-item__name">TSCA Reporting (April 2026)</div>
+          <div class="topic-item__desc">Reporting window opens requiring data back to 2011 for manufacturers, importers, processors</div>
+        </div>
+        <div class="topic-item">
+          <div class="topic-item__name">CERCLA Strict Liability</div>
+          <div class="topic-item__desc">Joint-and-several liability creating existential exposure for PFAS users and generators</div>
+        </div>
+        <div class="topic-item">
+          <div class="topic-item__name">50-State PFAS Patchwork</div>
+          <div class="topic-item__desc">No federal floor: each state building its own bans, limits, and reporting requirements</div>
+        </div>
+        <div class="topic-item">
+          <div class="topic-item__name">Industry-Specific Exposure</div>
+          <div class="topic-item__desc">Healthcare (medical devices), manufacturing (supply chain), data centers (emerging)</div>
+        </div>
+      </div>
+      <div class="pillar-zone pillar-zone--context">
+        <div class="pillar-zone__label pillar-zone__label--purple">Audience Context</div>
+        <div class="context-row">
+          <span class="context-row__audience">C-Suite</span>
+          <span class="context-row__text">Risk exposure quantification &mdash; financial impact of PFAS designations on operations and balance sheet</span>
+        </div>
+        <div class="context-row">
+          <span class="context-row__audience">Board</span>
+          <span class="context-row__text">Fiduciary duty &mdash; D&amp;O coverage implications, disclosure obligations, oversight frameworks</span>
+        </div>
+        <div class="context-row">
+          <span class="context-row__audience">Counsel</span>
+          <span class="context-row__text">TSCA reporting mechanics, exemptions, multi-state compliance strategy, litigation defense</span>
+        </div>
+      </div>
+      <div class="pillar-zone pillar-zone--hooks">
+        <div class="pillar-zone__label pillar-zone__label--amber">Sample Hooks</div>
+        <div class="hook-item">
+          <div class="hook-item__text">If your company has manufactured, imported, or processed PFAS since 2011, you have a reporting obligation starting April 2026. Here&rsquo;s what that means...</div>
+        </div>
+        <div class="hook-item">
+          <div class="hook-item__text">Your company never made PFAS. But if your products contain them? Under CERCLA, that might not matter. Here&rsquo;s why healthcare companies need to pay attention...</div>
+        </div>
+        <div class="hook-item">
+          <div class="hook-item__text">There is no federal PFAS standard. There are 50 different state standards. Here&rsquo;s how to build one compliance strategy that works...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide__footer"></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 12: PILLAR 3 DEEP DIVE -->
+<!-- ============================================================ -->
+<section class="slide slide--content slide--dense" data-slide-title="Pillar 3: Climate Disclosure">
+  <div class="slide__content">
+    <div class="slide__header reveal">
+      <h2 class="slide__title">Pillar 3: Climate Disclosure &amp; ESG Strategy</h2>
+      <p class="slide__subtitle">Highest engagement subtheme across competitors (111.7 avg). Bracewell currently at 0%. &bull; 1&ndash;2 posts/week</p>
+    </div>
+    <div class="pillar-layout reveal reveal-delay-1">
+      <div class="pillar-zone pillar-zone--topics">
+        <div class="pillar-zone__label pillar-zone__label--green">Core Topics</div>
+        <div class="topic-item">
+          <div class="topic-item__name">Jason Hut&rsquo;s Climate Disclosure White Paper</div>
+          <div class="topic-item__desc">Serialized content series launching with the white paper &mdash; 3&ndash;4 posts from different angles</div>
+        </div>
+        <div class="topic-item">
+          <div class="topic-item__name">California SB 253/261</div>
+          <div class="topic-item__desc">Scope 1/2 reporting by August 10, 2026 &mdash; the most broadly relevant state mandate</div>
+        </div>
+        <div class="topic-item">
+          <div class="topic-item__name">Greenwashing vs. Greenhushing</div>
+          <div class="topic-item__desc">The dual-sided trap where both environmental claims and silence carry legal consequences</div>
+        </div>
+        <div class="topic-item">
+          <div class="topic-item__name">Board Fiduciary Duty</div>
+          <div class="topic-item__desc">Only 2% of directors cite environmental expertise as a priority skill, yet liability is expanding</div>
+        </div>
+      </div>
+      <div class="pillar-zone pillar-zone--context">
+        <div class="pillar-zone__label pillar-zone__label--purple">Audience Context</div>
+        <div class="context-row">
+          <span class="context-row__audience">C-Suite</span>
+          <span class="context-row__text">Investor relations &amp; capital access implications of climate disclosure requirements</span>
+        </div>
+        <div class="context-row">
+          <span class="context-row__audience">Board</span>
+          <span class="context-row__text">Personal liability exposure, greenwashing defense, audit committee relevance</span>
+        </div>
+        <div class="context-row">
+          <span class="context-row__audience">Counsel</span>
+          <span class="context-row__text">Multi-state compliance strategy, SEC vs. state reporting reconciliation</span>
+        </div>
+      </div>
+      <div class="pillar-zone pillar-zone--hooks">
+        <div class="pillar-zone__label pillar-zone__label--green">Sample Hooks</div>
+        <div class="hook-item">
+          <div class="hook-item__text">California&rsquo;s SB 253 requires Scope 1 and 2 reporting by August 2026. If your company does business in California, here&rsquo;s what you need to prepare...</div>
+        </div>
+        <div class="hook-item">
+          <div class="hook-item__text">Say too much about your environmental record? Greenwashing lawsuit. Say too little? Shareholders sue for nondisclosure. Here&rsquo;s how to navigate the middle...</div>
+        </div>
+        <div class="hook-item">
+          <div class="hook-item__text">Only 2% of corporate directors cite environmental expertise as a priority skill. Meanwhile, environmental liability at the board level has never been higher...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide__footer"></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 13: PILLAR 4 DEEP DIVE -->
+<!-- ============================================================ -->
+<section class="slide slide--content slide--dense" data-slide-title="Pillar 4: Energy Transition">
+  <div class="slide__content">
+    <div class="slide__header reveal">
+      <h2 class="slide__title">Pillar 4: Energy Transition &amp; Infrastructure</h2>
+      <p class="slide__subtitle">Fastest-growing area. Data center electricity demand could double by 2027. &bull; 1&ndash;2 posts/week</p>
+    </div>
+    <div class="pillar-layout reveal reveal-delay-1">
+      <div class="pillar-zone pillar-zone--topics">
+        <div class="pillar-zone__label pillar-zone__label--amber">Core Topics</div>
+        <div class="topic-item">
+          <div class="topic-item__name">Data Center Permitting</div>
+          <div class="topic-item__desc">Navigating air, water, and community opposition simultaneously &mdash; 300+ state bills filed in early 2026</div>
+        </div>
+        <div class="topic-item">
+          <div class="topic-item__name">NEPA After CEQ</div>
+          <div class="topic-item__desc">Agency-by-agency permitting in a regulatory vacuum post-CEQ guidance withdrawal</div>
+        </div>
+        <div class="topic-item">
+          <div class="topic-item__name">IRA Tax Credits under OBBBA</div>
+          <div class="topic-item__desc">Compressed timelines and qualification uncertainty for energy transition projects</div>
+        </div>
+        <div class="topic-item">
+          <div class="topic-item__name">Renewables vs. Traditional Energy</div>
+          <div class="topic-item__desc">Where environmental law treats them differently &mdash; permitting, compliance, and risk profiles</div>
+        </div>
+      </div>
+      <div class="pillar-zone pillar-zone--context">
+        <div class="pillar-zone__label pillar-zone__label--purple">Audience Context</div>
+        <div class="context-row">
+          <span class="context-row__audience">C-Suite</span>
+          <span class="context-row__text">Speed-to-market advantage &mdash; how permitting reform affects project economics and timelines</span>
+        </div>
+        <div class="context-row">
+          <span class="context-row__audience">Board</span>
+          <span class="context-row__text">Oversight of project pipeline risk &mdash; $98B in projects at risk from env litigation</span>
+        </div>
+        <div class="context-row">
+          <span class="context-row__audience">Counsel</span>
+          <span class="context-row__text">Technology-specific permitting requirements, multi-jurisdiction compliance</span>
+        </div>
+      </div>
+      <div class="pillar-zone pillar-zone--hooks">
+        <div class="pillar-zone__label pillar-zone__label--amber">Sample Hooks</div>
+        <div class="hook-item">
+          <div class="hook-item__text">300 state bills filed on data centers in the first six weeks of 2026. Here are the five that pose the greatest risk to your portfolio...</div>
+        </div>
+        <div class="hook-item">
+          <div class="hook-item__text">CEQ withdrew its NEPA guidance. Now every federal agency is making its own permitting rules. Here&rsquo;s the map of who&rsquo;s doing what...</div>
+        </div>
+        <div class="hook-item">
+          <div class="hook-item__text">Your data center needs air permits, water permits, and community buy-in. Here&rsquo;s what&rsquo;s changing in each area simultaneously...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide__footer"></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 14: PILLAR 5 DEEP DIVE -->
+<!-- ============================================================ -->
+<section class="slide slide--content slide--dense" data-slide-title="Pillar 5: Practice Credibility">
+  <div class="slide__content">
+    <div class="slide__header reveal">
+      <h2 class="slide__title">Pillar 5: Practice Credibility &amp; People</h2>
+      <p class="slide__subtitle">Awards, conference recaps, partner spotlights, media coverage, podcast &bull; 1&ndash;2 posts/week</p>
+    </div>
+    <div class="pillar-layout reveal reveal-delay-1">
+      <div class="pillar-zone pillar-zone--topics">
+        <div class="pillar-zone__label">Core Topics</div>
+        <div class="topic-item">
+          <div class="topic-item__name">Awards &amp; Rankings</div>
+          <div class="topic-item__desc">Already proven: Law360 POTY post &mdash; 27 likes, 1,256 impressions (13&times; TL avg). Lawdragon Green 500 &mdash; 14 likes, 701 impressions. Your highest-performing content type.</div>
+        </div>
+        <div class="topic-item">
+          <div class="topic-item__name">Conference Recaps (3 Upcoming)</div>
+          <div class="topic-item__desc">Mar 18: Sahay at ABLC (low-carbon fuels). Apr 23: Holmstead at ABA Spring Conf (Clean Air Act). May 5: Bracewell Env Law Seminar (Houston). First test of recap format.</div>
+        </div>
+        <div class="topic-item">
+          <div class="topic-item__name">Partner Spotlights</div>
+          <div class="topic-item__desc">Jason Hut (climate disclosure), Seth Barsky, Shailesh Sahay (low-carbon fuels), Jeff Holmstead (Clean Air Act)</div>
+        </div>
+        <div class="topic-item">
+          <div class="topic-item__name">Environmental Law Monitor Podcast</div>
+          <div class="topic-item__desc">Relaunching &mdash; serialized content asset. 21% of top-performing env TL references a series or podcast</div>
+        </div>
+      </div>
+      <div class="pillar-zone pillar-zone--context">
+        <div class="pillar-zone__label pillar-zone__label--purple">Why This Pillar Matters</div>
+        <div class="context-row">
+          <span class="context-row__audience">Data</span>
+          <span class="context-row__text">Awards avg 20.5 likes &amp; 979 impressions in 2026. TL link-promo averages 2 likes &amp; 325 impressions. This pillar is your highest-ROI content type</span>
+        </div>
+        <div class="context-row">
+          <span class="context-row__audience">Gap</span>
+          <span class="context-row__text">0% post-event recap content today. Hogan gets 106.7 avg engagement from env events (38% of mix). Three confirmed events give you the first test</span>
+        </div>
+        <div class="context-row">
+          <span class="context-row__audience">Pipeline</span>
+          <span class="context-row__text">ABLC (Mar 18, DC), ABA Spring Conf (Apr 23, Minneapolis), Bracewell Seminar (May 5, Houston) &mdash; controllable content, no regulatory dependency</span>
+        </div>
+      </div>
+      <div class="pillar-zone pillar-zone--hooks">
+        <div class="pillar-zone__label pillar-zone__label--green">Sample Hooks</div>
+        <div class="hook-item">
+          <div class="hook-item__text">Shailesh Sahay just spoke on aligning US and EU incentives for low-carbon fuels at ABLC. Three things that stuck with us...</div>
+        </div>
+        <div class="hook-item">
+          <div class="hook-item__text">Environmental Law Monitor is back. In our first episode, we&rsquo;re tackling the question every in-house counsel is asking right now...</div>
+        </div>
+        <div class="hook-item">
+          <div class="hook-item__text">Jeff Holmstead is on a panel at the ABA Spring Conference on regulatory changes under the Clean Air Act&rsquo;s Endangerment Finding. Here&rsquo;s what we expect to be the most contentious question in the room...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide__footer"></div>
+</section>
+<!-- ============================================================ -->
+<!-- SLIDE 15: SIGNATURE FORMATS -->
+<!-- ============================================================ -->
+<section class="slide slide--content slide--dense" data-slide-title="Signature Formats">
+  <div class="slide__content">
+    <div class="slide__header reveal">
+      <h2 class="slide__title">Six Signature Formats</h2>
+      <p class="slide__subtitle">Repeatable templates the marketing team can produce consistently. <span class="algo-tag">Algorithm Insight</span> Document posts (carousels) earn +47% engagement and +23% reach. Text + Image is the most reliable anchor format (+16% engagement).</p>
+    </div>
+    <div class="grid-3x2 reveal reveal-delay-1" style="flex:1;">
+      <div class="feature-card border-blue">
+        <h3 class="feature-card__heading">&#128220; The Regulatory Breakdown</h3>
+        <p class="feature-card__body"><strong>120&ndash;180 words.</strong> Trend framing hook &rarr; what changed &rarr; what it means for [audience] &rarr; forward-looking implication. Narrative voice, no outbound link in body. Branded infographic or key stat visual.</p>
+        <div style="margin-top:8px;"><span class="topic-tag topic-tag--regulatory">Pillar 1</span> <span class="topic-tag topic-tag--pfas">Pillar 2</span> <span class="topic-tag topic-tag--climate">Pillar 3</span></div>
+      </div>
+      <div class="feature-card border-purple">
+        <h3 class="feature-card__heading">&#127908; The Conference Recap</h3>
+        <p class="feature-card__body"><strong>100&ndash;150 words.</strong> &ldquo;3 things we took away from [Event]&rdquo; &rarr; numbered insights with 1&ndash;2 sentence explanations &rarr; closing thought or question. First-person voice (partner or team), observational.</p>
+        <div style="margin-top:8px;"><span class="topic-tag topic-tag--credibility">Pillar 5</span></div>
+      </div>
+      <div class="feature-card border-red">
+        <h3 class="feature-card__heading">&#9888;&#65039; The Industry Alert</h3>
+        <p class="feature-card__body"><strong>80&ndash;120 words.</strong> Urgency hook &rarr; specific deadline or development &rarr; who&rsquo;s affected &rarr; one concrete action step. Direct, practical, no jargon. Branded deadline graphic.</p>
+        <div style="margin-top:8px;"><span class="topic-tag topic-tag--pfas">Pillar 2</span> <span class="topic-tag topic-tag--energy">Pillar 4</span></div>
+      </div>
+      <div class="feature-card border-amber">
+        <h3 class="feature-card__heading">&#128202; The Carousel Deep-Dive</h3>
+        <p class="feature-card__body"><strong>8&ndash;12 slides, 30&ndash;50 words/slide.</strong> Hook slide &rarr; problem framing &rarr; 4&ndash;6 data points &rarr; implication &rarr; CTA in comments. Vertical format (Canva). Best for comparisons, checklists, frameworks.</p>
+        <div style="margin-top:8px;"><span class="topic-tag topic-tag--pfas">Pillar 2</span> <span class="topic-tag topic-tag--climate">Pillar 3</span> <span class="topic-tag topic-tag--energy">Pillar 4</span></div>
+      </div>
+      <div class="feature-card border-green">
+        <h3 class="feature-card__heading">&#128100; The Partner POV</h3>
+        <p class="feature-card__body"><strong>100&ndash;160 words.</strong> Personal stake/observation &rarr; expert analysis in first person &rarr; forward-looking opinion &rarr; no CTA. Posted from individual partner profiles. Individual voice configured per brand voice profile.</p>
+        <div style="margin-top:8px;"><span class="topic-tag topic-tag--regulatory">Pillar 1</span> <span class="topic-tag topic-tag--climate">Pillar 3</span> <span class="topic-tag topic-tag--credibility">Pillar 5</span></div>
+      </div>
+      <div class="feature-card border-dark">
+        <h3 class="feature-card__heading">&#128240; The Media Aggregator</h3>
+        <p class="feature-card__body"><strong>60&ndash;80 words intro + 4&ndash;6 slide carousel.</strong> Brief framing intro &rarr; carousel slides with publication logo, headline, 1-line summary. Use when 4+ media hits land in same week on related topics.</p>
+        <div style="margin-top:8px;"><span class="topic-tag topic-tag--credibility">Pillar 5</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="slide__footer"></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 16: CADENCE & TESTING -->
+<!-- ============================================================ -->
+<section class="slide slide--content slide--dense" data-slide-title="Cadence">
+  <div class="slide__content">
+    <div class="slide__header reveal">
+      <h2 class="slide__title">Content Mix &amp; Cadence</h2>
+      <p class="slide__subtitle">4&ndash;6 dedicated environmental posts per week on the company page + 2&ndash;4 partner posts per month</p>
+    </div>
+    <div class="grid-2col reveal reveal-delay-1" style="flex:1;">
+      <div class="column-card">
+        <h3 class="column-card__title">Weekly Content Mix</h3>
+        <div class="table-wrapper">
+          <table class="data-table data-table--compact">
+            <thead>
+              <tr><th>Day</th><th>Pillar</th><th>Format</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Monday</strong></td><td>Regulatory Pulse</td><td>Regulatory Breakdown</td></tr>
+              <tr><td><strong>Tuesday</strong></td><td>PFAS / Climate</td><td>Industry Alert or Carousel</td></tr>
+              <tr><td><strong>Wednesday</strong></td><td>Energy Transition</td><td>Breakdown or Carousel</td></tr>
+              <tr><td><strong>Thursday</strong></td><td>Practice Credibility</td><td>Recap / Award / Media</td></tr>
+              <tr><td><strong>Friday</strong></td><td>Rotating</td><td>Partner POV (individual)</td></tr>
+              <tr><td><strong>As needed</strong></td><td>Any</td><td>Breaking news / alerts</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout" style="margin-top:12px;">
+          <strong>Employee Advocacy (Social HP):</strong> 3&ndash;4 pre-drafted share options per company page post. Partner-exclusive versions for individual thought leaders.
+        </div>
+      </div>
+      <div class="column-card">
+        <h3 class="column-card__title">Posting Rules</h3>
+        <ul class="card-list">
+          <li><strong>Minimum 100 words</strong> per thought leadership post (target 120&ndash;160)</li>
+          <li><strong>Maximum 2 hashtags</strong> per post (event-specific only)</li>
+          <li><strong>Links in first comment</strong>, never in the post body</li>
+          <li><strong>Always include an image</strong> or carousel (3.9&times; engagement)</li>
+          <li><strong>No repost-with-commentary</strong> as primary format</li>
+          <li><strong>Conference content = recap</strong>, not promo</li>
+          <li><strong>No politics</strong> &mdash; regulatory analysis and business impact only</li>
+          <li><strong>No client event publicity</strong> &mdash; env practice clients too sensitive</li>
+          <li><strong>Space same-source content</strong> 7+ days apart</li>
+          <li><strong>Maximum 8 @mentions</strong> per post (likely to engage back)</li>
+          <li><strong>AI content guardrail:</strong> Use AI for ideation and structure only. Add practitioner data, client scenarios, and specific analysis to every draft. <span class="algo-tag">Algorithm Insight</span> Fully AI-generated posts get 2.8&times; less reach; AI-assisted with human edits performs at near-human levels</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout reveal reveal-delay-2" style="margin-top:auto;">
+      <span class="algo-tag">Algorithm Insight</span> <strong>Month 1 A/B Tests:</strong> Post length (80&ndash;100 vs. 140&ndash;180 words) &bull; Hook style (question-led vs. narrative framing) &bull; Hashtag usage (0 vs. 2) &bull; Link placement (body vs. first comment). 4 posts per variant, measured by engagement rate. Optimal posting frequency: 4&times;/week is sustainable with active engagement; minimum 18 hours between posts to avoid self-cannibalization.
+    </div>
+  </div>
+  <div class="slide__footer"></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 17: 30-DAY LAUNCH PLAN -->
+<!-- ============================================================ -->
+<section class="slide slide--content slide--dense" data-slide-title="30-Day Launch">
+  <div class="slide__content">
+    <div class="slide__header reveal">
+      <h2 class="slide__title">30-Day Launch Plan</h2>
+      <p class="slide__subtitle">Week-by-week execution calendar starting March 2, 2026</p>
+    </div>
+    <div class="grid-2x2 reveal reveal-delay-1" style="flex:1;">
+      <div class="column-card border-blue">
+        <h3 class="column-card__title">Week 1: Mar 2&ndash;6</h3>
+        <p style="font-size:11px;color:var(--ip-primary-blue);font-weight:600;font-family:'Inter',sans-serif;margin-bottom:8px;">THEME: CLIMATE DISCLOSURE WHITE PAPER LAUNCH</p>
+        <ul class="card-list">
+          <li><strong>Mon:</strong> White paper launch &mdash; narrative intro (Company Page) + Jason Hut Partner POV</li>
+          <li><strong>Tue:</strong> White paper angle #2 &mdash; board-level disclosure obligations</li>
+          <li><strong>Wed:</strong> Endangerment Finding &mdash; what permits still require</li>
+          <li><strong>Thu:</strong> Law360 Practice Group of the Year (if announced) or other award</li>
+          <li><strong>Fri:</strong> PFAS TSCA April 2026 reporting window alert</li>
+        </ul>
+      </div>
+      <div class="column-card border-red">
+        <h3 class="column-card__title">Week 2: Mar 10&ndash;14</h3>
+        <p style="font-size:11px;color:#EF4444;font-weight:600;font-family:'Inter',sans-serif;margin-bottom:8px;">THEME: PFAS LIABILITY + ENERGY FOCUS</p>
+        <ul class="card-list">
+          <li><strong>Mon:</strong> &ldquo;PFAS Reporting 2026: 5 Things Manufacturers Need to Know&rdquo; (carousel)</li>
+          <li><strong>Tue:</strong> State enforcement trends in energy sector</li>
+          <li><strong>Wed:</strong> White paper angle #3 &mdash; investor vs. anti-ESG pressure</li>
+          <li><strong>Thu:</strong> Data center state legislative tracker alert</li>
+          <li><strong>Fri:</strong> Seth Barsky Partner POV on emerging env issue</li>
+        </ul>
+      </div>
+      <div class="column-card border-purple">
+        <h3 class="column-card__title">Week 3: Mar 17&ndash;21</h3>
+        <p style="font-size:11px;color:var(--ip-accent-violet);font-weight:600;font-family:'Inter',sans-serif;margin-bottom:8px;">THEME: ABLC CONFERENCE + BOARD GOVERNANCE</p>
+        <ul class="card-list">
+          <li><strong>Mon:</strong> Board governance &mdash; environmental oversight as fiduciary duty</li>
+          <li><strong>Tue:</strong> Pre-event for Shailesh Sahay&rsquo;s ABLC panel: &ldquo;Aligning Regulatory &amp; Market Incentives for Low-Carbon Fuels&rdquo; (Washington, DC)</li>
+          <li><strong>Wed 3/18:</strong> ABLC day-of coverage &mdash; live highlights or key quotes from Sahay&rsquo;s panel</li>
+          <li><strong>Thu 3/19:</strong> <strong>Conference recap</strong> &mdash; &ldquo;3 takeaways from ABLC on US-EU low-carbon fuel alignment&rdquo; (Sahay recap, narrative format)</li>
+          <li><strong>Fri:</strong> Jason Hut Partner POV &mdash; serialized &ldquo;What we&rsquo;re watching&rdquo;</li>
+        </ul>
+      </div>
+      <div class="column-card border-green">
+        <h3 class="column-card__title">Week 4: Mar 24&ndash;28</h3>
+        <p style="font-size:11px;color:#059669;font-weight:600;font-family:'Inter',sans-serif;margin-bottom:8px;">THEME: PODCAST RELAUNCH + SERIES MOMENTUM</p>
+        <ul class="card-list">
+          <li><strong>Mon:</strong> Environmental Law Monitor podcast relaunch announcement</li>
+          <li><strong>Tue:</strong> PFAS in healthcare &mdash; CERCLA exposure from medical devices</li>
+          <li><strong>Wed:</strong> First podcast episode with key takeaway (not &ldquo;listen here&rdquo;)</li>
+          <li><strong>Thu:</strong> Media roundup carousel (if 4+ hits) or individual spotlight</li>
+          <li><strong>Fri:</strong> State enforcement carousel &mdash; state-by-state data</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="slide__footer"></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 18: PARTNER ACTIVATION -->
+<!-- ============================================================ -->
+<section class="slide slide--content slide--compact" data-slide-title="Partner Activation">
+  <div class="slide__content">
+    <div class="slide__header reveal">
+      <h2 class="slide__title">Partner Thought Leadership Activation</h2>
+      <p class="slide__subtitle">Individual expert voice is the #1 engagement multiplier. Company page + partner profiles = compounding reach.</p>
+    </div>
+    <div class="grid-2col reveal reveal-delay-1" style="flex:1;">
+      <div>
+        <div class="table-wrapper" style="margin-bottom:16px;">
+          <table class="data-table">
+            <thead>
+              <tr><th>Partner</th><th>Focus Area</th><th>Cadence</th><th>Start</th></tr>
+            </thead>
+            <tbody>
+              <tr class="highlight-row"><td><strong>Jason Hut</strong></td><td>Climate disclosure, ESG strategy (practice chair)</td><td>2&ndash;3 posts/month</td><td>Week 1 (white paper)</td></tr>
+              <tr><td><strong>Seth Barsky</strong></td><td>TBD &mdash; awaiting confirmation</td><td>1&ndash;2 posts/month</td><td>Month 2</td></tr>
+              <tr><td><strong>Shailesh Sahay</strong></td><td>Low-carbon fuels, energy transition, shipping</td><td>Event-driven</td><td>Mar 18 (ABLC panel)</td></tr>
+              <tr><td><strong>Jeff Holmstead</strong></td><td>Clean Air Act, Endangerment Finding</td><td>Event-driven</td><td>Apr 23 (ABA panel)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="feature-card" style="margin-bottom:16px;">
+          <h3 class="feature-card__heading">Brand Voice Configuration</h3>
+          <p class="feature-card__body">Each partner gets an individual voice profile across four dimensions (Nielsen Norman Group scale):</p>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:10px;">
+            <div style="font-size:12px; color:var(--ip-text-muted); font-family:'Inter',sans-serif;">Serious &#8596; Funny: <strong>3&ndash;4</strong></div>
+            <div style="font-size:12px; color:var(--ip-text-muted); font-family:'Inter',sans-serif;">Matter-of-fact &#8596; Enthusiastic: <strong>2&ndash;3</strong></div>
+            <div style="font-size:12px; color:var(--ip-text-muted); font-family:'Inter',sans-serif;">Irreverent &#8596; Respectful: <strong>4&ndash;5</strong></div>
+            <div style="font-size:12px; color:var(--ip-text-muted); font-family:'Inter',sans-serif;">Casual &#8596; Formal: <strong>2&ndash;3</strong></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="feature-card" style="margin-bottom:16px;">
+          <h3 class="feature-card__heading">Company Page vs. Individual Amplification</h3>
+          <div class="vs-box">
+            <div class="vs-box__label">Company Page</div>
+            <div class="vs-box__desc">Official voice. Regulatory analysis. Awards. Announcements. All 6 signature formats.</div>
+          </div>
+          <div class="vs-box">
+            <div class="vs-box__label">Partner Profiles</div>
+            <div class="vs-box__desc">Expert voice. First-person POV. Conference insights. 5&ndash;10&times; company page reach per engaged partner.</div>
+          </div>
+          <div class="vs-box">
+            <div class="vs-box__label">Employee Advocacy (Social HP)</div>
+            <div class="vs-box__desc">Amplification layer. ~100 active users, 50% weekly. 3&ndash;4 pre-drafted share options per post.</div>
+          </div>
+        </div>
+        <div class="callout">
+          <strong>The Justin Savage Model:</strong> Sidley&rsquo;s Justin Savage has 28.8K followers posting 6&times;/month. He carries the entire practice&rsquo;s LinkedIn presence from his individual profile. Jason Hut (climate disclosure) is the primary build. Sahay and Holmstead are event-driven activations &mdash; their confirmed panels (Mar 18 ABLC, Apr 23 ABA) create natural content moments for pre-event + recap posts from their individual profiles.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide__footer"></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 19: ENGAGEMENT ENGINE -->
+<!-- ============================================================ -->
+<section class="slide slide--content slide--dense" data-slide-title="Engagement Engine">
+  <div class="slide__content">
+    <div class="slide__header reveal">
+      <h2 class="slide__title">The Engagement Engine</h2>
+      <p class="slide__subtitle">Posting is half the program. Page management, employee amplification, and strategic commenting are the distribution multipliers. <span class="algo-tag">Algorithm Insight</span> Reply activity reduces reach decline by 14%.</p>
+    </div>
+    <div class="grid-2x2 reveal reveal-delay-1" style="flex:1;">
+      <!-- Card 1: Page Response Protocol -->
+      <div class="column-card" style="border-top:3px solid var(--ip-primary-blue);">
+        <h3 class="column-card__title">Page Response Protocol</h3>
+        <ul class="card-list">
+          <li><strong>Reply to every comment</strong> within 2 hours during business hours (8 AM&ndash;6 PM CT)</li>
+          <li><strong>First 90 minutes are critical</strong> &mdash; the algorithm evaluates post quality in this window. Pre-schedule responses for first-wave comments</li>
+          <li><strong>Quality standard:</strong> Minimum 15 words per reply. Add insight, ask a follow-up question, or reference specific data</li>
+          <li><strong>Escalation:</strong> Flag negative or legal-risk comments to Sally Slater within 1 hour. Do not delete or argue publicly</li>
+          <li><strong>Tag partners:</strong> When a comment relates to a partner&rsquo;s focus area, tag them in the reply to activate their network</li>
+        </ul>
+      </div>
+      <!-- Card 2: Employee Amplification Program -->
+      <div class="column-card" style="border-top:3px solid #059669;">
+        <h3 class="column-card__title">Employee Amplification Program</h3>
+        <ul class="card-list">
+          <li><strong>Social HP platform:</strong> ~100 active users, 50% weekly participation. Target: 60% weekly within 90 days</li>
+          <li><strong>3&ndash;4 pre-drafted share options</strong> per company page post (varying angles and tones)</li>
+          <li><strong>Partner-exclusive versions</strong> for Jason Hut, Seth Barsky, and event speakers (first-person voice)</li>
+          <li><strong>Notification cadence:</strong> Slack/Teams alert within 30 minutes of each new post</li>
+          <li><strong>Environmental practice attorneys</strong> are priority amplifiers &mdash; their shares carry topical authority</li>
+        </ul>
+        <div class="callout" style="margin-top:8px;">
+          <span class="algo-tag">Algorithm Insight</span> Company pages get significantly lower organic reach than individual profiles. Employee sharing is your primary distribution lever &mdash; each share exposes the post to a new personal network.
+        </div>
+      </div>
+      <!-- Card 3: Strategic Engagement from Page -->
+      <div class="column-card" style="border-top:3px solid var(--ip-accent-violet);">
+        <h3 class="column-card__title">Strategic Engagement from Page</h3>
+        <ul class="card-list">
+          <li><strong>Comment as Bracewell</strong> on 3&ndash;5 industry posts per week (EPA announcements, trade association content, peer firm milestones)</li>
+          <li><strong>Engage with partner posts</strong> from the company page within 30 minutes of publishing</li>
+          <li><strong>A3 comment pattern:</strong> Add insight &rarr; Ask a specific question &rarr; Anchor with a takeaway. Minimum 25 words</li>
+          <li><strong>Cross-cluster engagement:</strong> Comment on diverse profiles (energy, manufacturing, real estate, healthcare) to expand Bracewell&rsquo;s topic graph</li>
+          <li><strong>Avoid:</strong> Generic &ldquo;Great post!&rdquo; comments. Every comment should demonstrate environmental expertise</li>
+        </ul>
+      </div>
+      <!-- Card 4: What We'll Track -->
+      <div class="column-card" style="border-top:3px solid #D97706;">
+        <h3 class="column-card__title">What We&rsquo;ll Track</h3>
+        <div class="table-wrapper">
+          <table class="data-table data-table--compact">
+            <thead>
+              <tr><th>Metric</th><th>Baseline</th><th>90-Day Target</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Avg engagement/post</td><td class="text-negative">10.7</td><td class="text-positive">25+</td></tr>
+              <tr><td>Employee share rate</td><td>50% weekly</td><td>60% weekly</td></tr>
+              <tr><td>Page response time</td><td>Not tracked</td><td>&lt;2 hours</td></tr>
+              <tr><td>Comment quality (avg words)</td><td>Not tracked</td><td>25+ words</td></tr>
+              <tr><td>Partner post frequency</td><td>0/month</td><td>2&ndash;4/month</td></tr>
+              <tr><td>Unique commenters/post</td><td>~3</td><td>8+</td></tr>
+              <tr><td>Save-to-like ratio</td><td>Not tracked</td><td>&gt;5%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout" style="margin-top:8px;">
+          <span class="algo-tag">Algorithm Insight</span> Saves are the #1 signal for resurfacing in Suggested feeds (+60% probability). Tracking save-to-like ratio reveals content that earns lasting distribution.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide__footer"></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 20: NEXT STEPS -->
+<!-- ============================================================ -->
+<section class="slide slide--content slide--compact" data-slide-title="Next Steps">
+  <div class="slide__content">
+    <div class="slide__header reveal">
+      <h2 class="slide__title">Next Steps</h2>
+      <p class="slide__subtitle">Immediate action items to launch the 90-day pilot</p>
+    </div>
+    <div class="grid-2col reveal reveal-delay-1" style="flex:1;">
+      <div class="column-card">
+        <h3 class="column-card__title">Bracewell Action Items</h3>
+        <ul class="card-list card-list--checklist">
+          <li><strong>Share environmental content performance metrics</strong> &mdash; Week of Mar 2</li>
+          <li><strong>Share upcoming events calendar</strong> for environmental practice &mdash; Week of Mar 2</li>
+          <li><strong>Share awards/rankings calendar</strong> for upcoming announcements &mdash; Week of Mar 2</li>
+          <li><strong>Provide writing samples</strong> for Jason Hut and Seth Barsky &mdash; Week of Mar 2</li>
+          <li><strong>Schedule platform onboarding call</strong> via Sally&rsquo;s meeting link &mdash; ASAP</li>
+          <li><strong>Confirm third partner</strong> for thought leadership activation &mdash; Week of Mar 10</li>
+          <li><strong>Provide Canva templates</strong> (including new vertical format) &mdash; Week of Mar 10</li>
+          <li><strong>Discuss whether head of Environment practice should be involved</strong> &mdash; Open</li>
+        </ul>
+      </div>
+      <div class="column-card">
+        <h3 class="column-card__title">InnovAItion Partners Action Items</h3>
+        <ul class="card-list card-list--checklist">
+          <li class="is-checked"><strong>Deliver strategy document</strong> (this deck) &mdash; Week of Mar 2</li>
+          <li><strong>Create individual brand voices</strong> for Jason Hut + Seth Barsky &mdash; Upon receipt of samples</li>
+          <li><strong>Create default &ldquo;Bracewell Environmental Partner&rdquo; voice</strong> &mdash; Week of Mar 2</li>
+          <li><strong>Configure workflows + brand voices</strong> in platform &mdash; Week of Mar 10</li>
+          <li><strong>Set up monthly reporting</strong> (requires company page access) &mdash; Week of Mar 10</li>
+          <li><strong>Schedule recurring check-in cadence</strong> &mdash; Week of Mar 2</li>
+        </ul>
+        <div class="callout" style="margin-top:12px;">
+          <strong>Success Metrics:</strong> Avg engagement per post (10.7 &rarr; 25+), content types used (2 &rarr; 5+), partner posts (0 &rarr; 2&ndash;4/month), advocacy participation (100 &rarr; 120 active), website referral traffic, BD leads, lawyer satisfaction.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide__footer"></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 20: DIVIDER - APPENDIX -->
+<!-- ============================================================ -->
+<section class="slide slide--divider" data-slide-title="Appendix">
+  <div class="slide__content">
+    <p class="divider__eyebrow reveal">Appendix</p>
+    <h2 class="divider__title reveal reveal-delay-1">Supporting Data</h2>
+    <p class="divider__subtitle reveal reveal-delay-2">Competitor benchmarks, audience pain point detail, and individual leader analysis</p>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 21: COMPETITOR BENCHMARK -->
+<!-- ============================================================ -->
+<section class="slide slide--content slide--dense" data-slide-title="Competitor Benchmark">
+  <div class="slide__content">
+    <div class="slide__header reveal">
+      <h2 class="slide__title">Competitor Benchmark <span class="appendix-badge">Appendix A1</span></h2>
+      <p class="slide__subtitle">Company page environmental content analysis across 4 peer firms &bull; 497 total posts analyzed</p>
+    </div>
+    <div class="table-wrapper reveal reveal-delay-1" style="margin-bottom:16px;">
+      <table class="data-table">
+        <thead>
+          <tr><th>Metric</th><th>Bracewell</th><th>Hogan Lovells</th><th>Hunton Andrews Kurth</th><th>Sidley Austin</th></tr>
+        </thead>
+        <tbody>
+          <tr class="highlight-row"><td>Environmental posts</td><td><strong>22</strong> (42.3%)</td><td>16 (16%)</td><td>12 (12.1%)</td><td>2 (2%)</td></tr>
+          <tr><td>Avg engagement</td><td class="text-negative">10.7</td><td class="text-positive">80.4</td><td>19.2</td><td>122.5</td></tr>
+          <tr><td>Avg word count (env)</td><td>93</td><td class="text-positive">139</td><td>71</td><td>134</td></tr>
+          <tr><td>Environmental TL posts</td><td><strong>14</strong></td><td>6</td><td>8</td><td>0</td></tr>
+          <tr><td>TL avg engagement</td><td class="text-negative">6.0</td><td class="text-positive">56.5</td><td>12.5</td><td>&mdash;</td></tr>
+          <tr><td>Events/conference content</td><td class="text-negative">0%</td><td class="text-positive">38%</td><td>17%</td><td>0%</td></tr>
+          <tr><td>Share performance lift</td><td class="text-positive">+71.2%</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+          <tr><td>Hashtag usage rate</td><td class="text-warning">95.5%</td><td>25%</td><td>50%</td><td>0%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="grid-2col reveal reveal-delay-2" style="flex:1;">
+      <div class="column-card">
+        <h3 class="column-card__title">Key Whitespace Opportunities</h3>
+        <ul class="card-list">
+          <li><strong>PFAS deep-dives by industry</strong> &mdash; No firm creates industry-specific PFAS content</li>
+          <li><strong>Board-level environmental governance</strong> &mdash; No firm targets board audiences directly</li>
+          <li><strong>Conference recaps with original analysis</strong> &mdash; Insight-driven, not promotional</li>
+          <li><strong>Data center environmental strategy</strong> &mdash; Fastest-growing segment, no firm owns it</li>
+          <li><strong>State-by-state compliance playbooks</strong> &mdash; Federal deregulation shifted risk to states</li>
+        </ul>
+      </div>
+      <div class="column-card">
+        <h3 class="column-card__title">Format Whitespace</h3>
+        <ul class="card-list">
+          <li><strong>Carousels</strong> &mdash; Not used by Bracewell. High shareability for data-driven insights</li>
+          <li><strong>Conference recaps</strong> &mdash; 0% of env content today. Hogan gets 106.7 avg from events</li>
+          <li><strong>Narrative TL (120+ words)</strong> &mdash; Rare today. High performers run 80&ndash;180 words</li>
+          <li><strong>Partner-bylined posts</strong> &mdash; First-person voice is the engagement multiplier</li>
+          <li><strong>Serialized content</strong> &mdash; 21% of top TL references a series or podcast</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="slide__footer"></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 22: AUDIENCE PAIN POINTS -->
+<!-- ============================================================ -->
+<section class="slide slide--content slide--dense" data-slide-title="Audience Pain Points">
+  <div class="slide__content">
+    <div class="slide__header reveal">
+      <h2 class="slide__title">Audience Pain Points <span class="appendix-badge">Appendix A2</span></h2>
+      <p class="slide__subtitle">Cross-cutting themes from 12 audience research reports (4 industries &times; 3 stakeholder tiers)</p>
+    </div>
+    <div class="grid-2col reveal reveal-delay-1" style="flex:1;">
+      <div class="column-card">
+        <h3 class="column-card__title">Top 5 Cross-Cutting Pain Points</h3>
+        <ul class="card-list">
+          <li><strong>PFAS liability is #1 across all segments</strong> &mdash; TSCA reporting (April 2026) requires data back to 2011. CERCLA strict/joint-and-several liability creates existential exposure</li>
+          <li><strong>Federal deregulation &ne; reduced risk</strong> &mdash; 76% decline in EPA civil lawsuits, but citizen suits up 15%, state enforcement expanding, private litigation accelerating</li>
+          <li><strong>California SB 253/261</strong> &mdash; Appears in every segment. Scope 1/2 reporting by Aug 10, 2026. Most broadly relevant state mandate</li>
+          <li><strong>Greenwashing vs. Greenhushing</strong> &mdash; Dual-sided trap where both environmental claims and silence carry legal consequences</li>
+          <li><strong>Board expertise gaps</strong> &mdash; Only 2% of directors cite environmental expertise as priority skill, yet liability is expanding</li>
+        </ul>
+      </div>
+      <div class="column-card">
+        <h3 class="column-card__title">Industry-Specific Triggers</h3>
+        <div class="table-wrapper">
+          <table class="data-table data-table--compact">
+            <thead>
+              <tr><th>Industry</th><th>Unique Pain Point</th><th>Content Angle</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Energy</strong></td><td>Endangerment Finding rescission</td><td>&ldquo;What your permits actually mean now&rdquo;</td></tr>
+              <tr><td><strong>Manufacturing</strong></td><td>50-state EPR patchwork + PFAS data gaps</td><td>&ldquo;One compliance strategy across 50 states&rdquo;</td></tr>
+              <tr><td><strong>Data Centers</strong></td><td>300+ state bills in 6 weeks; moratoriums</td><td>&ldquo;Which bills pose greatest portfolio risk&rdquo;</td></tr>
+              <tr><td><strong>Healthcare</strong></td><td>PFAS in medical devices + Subpart P</td><td>&ldquo;CERCLA exposure from products you never made&rdquo;</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout" style="margin-top:12px;">
+          <strong>Content mapping principle:</strong> All content maps back to five named practice focus areas &mdash; <strong>permitting reform</strong>, <strong>environmental audits</strong>, <strong>PFAS</strong>, <strong>climate disclosure</strong>, and <strong>clean air</strong>. Each gets framed differently for C-suite (business impact), boards (fiduciary duty), and in-house counsel (actionable compliance steps). Environmental audits, in particular, cross every industry: proactive audit programs, privilege mechanics, and self-reporting strategy.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide__footer"></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 23: INDIVIDUAL LEADERS -->
+<!-- ============================================================ -->
+<section class="slide slide--content slide--dense" data-slide-title="Individual Leaders">
+  <div class="slide__content">
+    <div class="slide__header reveal">
+      <h2 class="slide__title">Individual Leader Benchmarks <span class="appendix-badge">Appendix A3</span></h2>
+      <p class="slide__subtitle">Top environmental thought leaders across competitor firms &mdash; the playbook for partner activation</p>
+    </div>
+    <div class="grid-3col reveal reveal-delay-1" style="flex:1;">
+      <div class="feature-card border-blue">
+        <h3 class="feature-card__heading">Justin Savage &mdash; Sidley Austin</h3>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:12px;">
+          <div class="stat-block" style="padding:8px;">
+            <div class="stat-block__value" style="font-size:24px;">28,831</div>
+            <div class="stat-block__label">Followers</div>
+          </div>
+          <div class="stat-block" style="padding:8px;">
+            <div class="stat-block__value" style="font-size:24px;">6.0</div>
+            <div class="stat-block__label">Posts/month</div>
+          </div>
+        </div>
+        <p class="feature-card__body"><strong>76.3 avg env engagement.</strong> Volume + events coverage + first-person voice. Carries Sidley&rsquo;s entire env LinkedIn presence from his individual profile. The model for Jason Hut.</p>
+      </div>
+      <div class="feature-card border-purple">
+        <h3 class="feature-card__heading">Tom Boer &mdash; Hogan Lovells</h3>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:12px;">
+          <div class="stat-block" style="padding:8px;">
+            <div class="stat-block__value" style="font-size:24px;">1,684</div>
+            <div class="stat-block__label">Followers</div>
+          </div>
+          <div class="stat-block" style="padding:8px;">
+            <div class="stat-block__value" style="font-size:24px;">1.6</div>
+            <div class="stat-block__label">Posts/month</div>
+          </div>
+        </div>
+        <p class="feature-card__body"><strong>72.6 avg env engagement.</strong> Substantive thought leadership averaging 107 words per post. Proves you don&rsquo;t need high volume &mdash; quality and depth drive engagement with fewer posts.</p>
+      </div>
+      <div class="feature-card border-green">
+        <h3 class="feature-card__heading">Nadira Clarke &mdash; Hogan Lovells</h3>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:12px;">
+          <div class="stat-block" style="padding:8px;">
+            <div class="stat-block__value" style="font-size:24px;">1,589</div>
+            <div class="stat-block__label">Followers</div>
+          </div>
+          <div class="stat-block" style="padding:8px;">
+            <div class="stat-block__value" style="font-size:24px;">2.8</div>
+            <div class="stat-block__label">Posts/month</div>
+          </div>
+        </div>
+        <p class="feature-card__body"><strong>67.8 avg env engagement</strong> with <strong>+138% engagement lift</strong> on environmental content vs. non-environmental. Demonstrates that environmental topics are an engagement multiplier when done right.</p>
+      </div>
+    </div>
+    <div class="callout reveal reveal-delay-2" style="margin-top:auto;">
+      <strong>The takeaway for Bracewell:</strong> Individual partner profiles consistently outperform company pages by 5&ndash;10&times; in reach and engagement. Jason Hut&rsquo;s climate disclosure expertise + Seth Barsky&rsquo;s emerging profile = the same formula. The system (workflows, voice profiles, advocacy cadence) just needs to support them.
+    </div>
+  </div>
+  <div class="slide__footer"></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE: YOUR 2026 CONTENT PERFORMANCE -->
+<!-- ============================================================ -->
+<section class="slide slide--content slide--dense" data-slide-title="Your 2026 Content">
+  <div class="slide__content">
+    <div class="slide__header reveal">
+      <h2 class="slide__title">Your 2026 Content Performance <span class="appendix-badge">Appendix A4</span></h2>
+      <p class="slide__subtitle">Environmental content posted January 1 &ndash; February 2026 + confirmed upcoming events</p>
+    </div>
+    <div class="grid-2col reveal reveal-delay-1" style="flex:1;">
+      <div class="column-card">
+        <h3 class="column-card__title">2026 Environmental Posts (Jan &ndash; Feb)</h3>
+        <div class="table-wrapper">
+          <table class="data-table data-table--compact">
+            <thead>
+              <tr><th>Date</th><th>Type</th><th>Topic</th><th>Likes</th><th>Impr.</th></tr>
+            </thead>
+            <tbody>
+              <tr class="highlight-row"><td>1/27</td><td>Award</td><td>Law360 Env POTY 2025</td><td class="text-positive"><strong>27</strong></td><td><strong>1,256</strong></td></tr>
+              <tr class="highlight-row"><td>1/29</td><td>Award (Video)</td><td>Lawdragon Green 500 Guide</td><td class="text-positive"><strong>14</strong></td><td><strong>701</strong></td></tr>
+              <tr><td>1/8</td><td>Article/TL</td><td>CARB Regs for SB 253 &amp; SB 261</td><td class="text-negative">1</td><td>323</td></tr>
+              <tr><td>1/16</td><td>Media/TL</td><td>EPA Air Pollution Rule Changes</td><td class="text-negative">3</td><td>286</td></tr>
+              <tr><td>1/17</td><td>Article/TL</td><td>NY Mandatory GHG Reporting</td><td class="text-negative">2</td><td>406</td></tr>
+              <tr><td>1/20</td><td>Media/TL</td><td>EPA Endangerment Repeal Watch</td><td class="text-negative">2</td><td>406</td></tr>
+              <tr><td>1/26</td><td>Event</td><td>Ethanol 101 for Shipping (Sahay)</td><td>5</td><td>206</td></tr>
+              <tr><td>2/1</td><td>Event</td><td>Ethanol 101 Post 2 (Sahay)</td><td class="text-negative">1</td><td>683</td></tr>
+              <tr><td>2/11</td><td>Media/TL</td><td>EPA Supreme Court Climate Showdown</td><td class="text-negative">2</td><td>283</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="column-card">
+        <h3 class="column-card__title">Confirmed Upcoming Events</h3>
+        <div class="table-wrapper" style="margin-bottom:12px;">
+          <table class="data-table data-table--compact">
+            <thead>
+              <tr><th>Date</th><th>Event</th><th>Lawyer</th><th>Location</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Mar 18</strong></td><td>ABLC Panel: US-EU Low-Carbon Fuels</td><td>Shailesh Sahay</td><td>Washington, DC</td></tr>
+              <tr><td><strong>Apr 23</strong></td><td>ABA 55th Spring Conf: Clean Air Act Endangerment Finding</td><td>Jeff Holmstead</td><td>Minneapolis, MN</td></tr>
+              <tr><td><strong>May 5</strong></td><td>Spring 2026 Env Law Seminar</td><td>TBD (multi-partner)</td><td>Bracewell Houston</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout">
+          <strong>The format opportunity is clear:</strong> Awards drive 20.5 avg likes vs. 2.0 for TL link-promo &mdash; a <strong>10&times; gap</strong>. But you can&rsquo;t manufacture awards. What you <em>can</em> control is the format of your thought leadership. The three upcoming events are the first test: pre-event promo + post-event recap in narrative &ldquo;3 takeaways&rdquo; format. If recaps outperform the link-promo TL baseline of 2 likes, the strategy thesis is validated.
+        </div>
+        <div class="callout" style="border-left-color:#D97706;">
+          <strong>Note on event posts:</strong> The Ethanol 101 event posts (Jan 26 &amp; Feb 1) were pre-event promotional only. The strategy recommends adding <strong>post-event recaps with original analysis</strong> &mdash; the format that drives 106.7 avg engagement for competitors. Sahay&rsquo;s ABLC panel on Mar 18 is the first opportunity to test this.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide__footer"></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- THANK YOU -->
+<!-- ============================================================ -->
+<section class="slide slide--thankyou" data-slide-title="Thank You">
+  <div class="slide__content" style="justify-content:center; align-items:center;">
+    <div style="text-align:center;">
+      <h1 class="thankyou__title reveal">Thank You</h1>
+      <p class="thankyou__subtitle reveal reveal-delay-1">Bracewell LLP &bull; Environmental Practice</p>
+      <p class="thankyou__contact reveal reveal-delay-2">Prepared by InnovAItion Partners &bull; February 2026</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- JAVASCRIPT -->
+<!-- ============================================================ -->
+<script>
+(function() {
+  'use strict';
+
+  // ---- SCROLL-DRIVEN NAVIGATION ----
+  var slides = document.querySelectorAll('.slide');
+  var dots = document.getElementById('navDots');
+  var progress = document.getElementById('progressBar');
+
+  slides.forEach(function(slide, i) {
+    var dot = document.createElement('div');
+    dot.className = 'nav-dot';
+    var tip = document.createElement('span');
+    tip.className = 'tooltip';
+    tip.textContent = slide.dataset.slideTitle || 'Slide ' + (i + 1);
+    dot.appendChild(tip);
+    dot.addEventListener('click', function() {
+      slide.scrollIntoView({ behavior: 'smooth' });
+    });
+    dots.appendChild(dot);
+  });
+
+  var allDots = dots.querySelectorAll('.nav-dot');
+
+  function onScroll() {
+    var scrollTop = window.scrollY || document.documentElement.scrollTop;
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progress.style.width = pct + '%';
+
+    var current = 0;
+    slides.forEach(function(s, i) {
+      if (scrollTop >= s.offsetTop - window.innerHeight / 3) current = i;
+    });
+    allDots.forEach(function(d, i) {
+      d.classList.toggle('active', i === current);
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // ---- TABLE OF CONTENTS NAVIGATION ----
+  window.goToSlide = function(title) {
+    var target = document.querySelector('[data-slide-title="' + title + '"]');
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  // ---- REVEAL ON SCROLL ----
+  var reveals = document.querySelectorAll('.reveal');
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+
+  reveals.forEach(function(el) { observer.observe(el); });
+
+})();
+</script>
+</body>
+</html>
